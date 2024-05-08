@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using ClassLibrary.;
-using ClassLibrary; // Adjust the namespace to where clsCustomer is located
+using ClassLibrary;
 
 namespace Testing6
 {

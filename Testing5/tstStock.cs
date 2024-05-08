@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using ClassLibrary; // Adjust the namespace to where your clsStock class is located
+using ClassLibrary; // Adjust this to the correct namespace for clsStock2
 
 namespace Testing6
 {
@@ -10,30 +10,25 @@ namespace Testing6
         [TestMethod]
         public void InstanceOK()
         {
-            // Create an instance of the class to test
-            clsStock AStock = new clsStock();
-            // Assert that the object is not null
-            Assert.IsNotNull(AStock, "The clsStock instance should not be null.");
+            // Create an instance of the clsStock2 class
+            clsStock2 AStock = new clsStock2();
+            Assert.IsNotNull(AStock, "The clsStock2 instance should not be null.");
         }
 
         [TestMethod]
         public void ProductIDPropertyOK()
         {
-            // Create an instance of clsStock
-            clsStock AStock = new clsStock();
-            // Test data for ProductID
-            int TestData = 1;
-            // Assign the test data to ProductID
+            // Test the ProductID property
+            clsStock2 AStock = new clsStock2();
+            int TestData = 1;  // Test value for ProductID
             AStock.ProductID = TestData;
-            // Verify that ProductID matches the test data
             Assert.AreEqual(TestData, AStock.ProductID, "ProductID should match the assigned value.");
         }
 
         [TestMethod]
         public void ProductNamePropertyOK()
         {
-            // Test for ProductName property
-            clsStock AStock = new clsStock();
+            clsStock2 AStock = new clsStock2();
             string TestData = "Sample Product";
             AStock.ProductName = TestData;
             Assert.AreEqual(TestData, AStock.ProductName, "ProductName should match the assigned value.");
@@ -42,8 +37,7 @@ namespace Testing6
         [TestMethod]
         public void CategoryPropertyOK()
         {
-            // Test for Category property
-            clsStock AStock = new clsStock();
+            clsStock2 AStock = new clsStock2();
             string TestData = "Electronics";
             AStock.Category = TestData;
             Assert.AreEqual(TestData, AStock.Category, "Category should match the assigned value.");
@@ -52,8 +46,7 @@ namespace Testing6
         [TestMethod]
         public void QuantityInStockPropertyOK()
         {
-            // Test for Quantity in Stock property
-            clsStock AStock = new clsStock();
+            clsStock2 AStock = new clsStock2();
             int TestData = 100;
             AStock.QuantityInStock = TestData;
             Assert.AreEqual(TestData, AStock.QuantityInStock, "QuantityInStock should match the assigned value.");
@@ -62,8 +55,7 @@ namespace Testing6
         [TestMethod]
         public void ColorPropertyOK()
         {
-            // Test for Color property
-            clsStock AStock = new clsStock();
+            clsStock2 AStock = new clsStock2();
             string TestData = "Red";
             AStock.Color = TestData;
             Assert.AreEqual(TestData, AStock.Color, "Color should match the assigned value.");
@@ -72,8 +64,7 @@ namespace Testing6
         [TestMethod]
         public void SizePropertyOK()
         {
-            // Test for Size property
-            clsStock AStock = new clsStock();
+            clsStock2 AStock = new clsStock2();
             string TestData = "Medium";
             AStock.Size = TestData;
             Assert.AreEqual(TestData, AStock.Size, "Size should match the assigned value.");
@@ -82,20 +73,10 @@ namespace Testing6
         [TestMethod]
         public void SupplierIDPropertyOK()
         {
-            // Test for SupplierID property
-            clsStock AStock = new clsStock();
+            clsStock2 AStock = new clsStock2();
             int TestData = 5;
             AStock.SupplierID = TestData;
             Assert.AreEqual(TestData, AStock.SupplierID, "SupplierID should match the assigned value.");
         }
-    }
-
-        public int ProductID { get; internal set; }
-        public string ProductName { get; internal set; }
-        public string Category { get; internal set; }
-        public int QuantityInStock { get; internal set; }
-        public string Color { get; internal set; }
-        public string Size { get; internal set; }
-        public int SupplierID { get; internal set; }
     }
 }
