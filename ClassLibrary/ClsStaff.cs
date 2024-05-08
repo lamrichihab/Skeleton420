@@ -1,9 +1,6 @@
 ﻿namespace ClassLibrary
 {
-    public class ClsStaff
+    public class clsStaff
     {
-        public ClsStaff()
-        {
-        }
     }
 }
