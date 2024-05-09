@@ -40,12 +40,14 @@
         </p>
         <!-- Error message label -->
         <p>
+
             <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red" Visible="False" />
         </p>
         <!-- OK and Cancel buttons -->
         <p>
             <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" />
             <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+
         </p>
     </form>
 </body>
