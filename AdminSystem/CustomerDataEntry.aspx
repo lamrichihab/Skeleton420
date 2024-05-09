@@ -8,7 +8,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            This is the Customer Data Entry page.
+            <h1>Customer Data Entry</h1>
         </div>
         <p>
             <asp:Label ID="lblCustomerID" runat="server" Text="Customer ID" style="display: inline-block; width: 120px;" />
@@ -38,8 +38,14 @@
             <asp:Label ID="lblIsActive" runat="server" Text="Is Active" style="display: inline-block; width: 120px;" />
             <asp:CheckBox ID="chkIsActive" runat="server" />
         </p>
+        <!-- Error message label -->
         <p>
-            <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
+            <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red" Visible="False" />
+        </p>
+        <!-- OK and Cancel buttons -->
+        <p>
+            <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" />
+            <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
         </p>
     </form>
 </body>
