@@ -39,7 +39,7 @@
             <asp:CheckBox ID="chkIsActive" runat="server" />
         </p>
         <p>
-            <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
+             
         </p>
     </form>
 </body>
