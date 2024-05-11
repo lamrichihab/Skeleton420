@@ -22,13 +22,14 @@ public partial class _1_DataEntry : Page
             newCustomer.FullName = txtFullName.Text;
 
             // Validate email format (very basic check)
-            if (!newCustomer.EmailAddress.Contains("@"))
+            string emailAddress = txtEmailAddress.Text.Trim(); // Trim to remove leading and trailing whitespaces
+            if (string.IsNullOrEmpty(emailAddress) || !IsValidEmail(emailAddress))
             {
                 ShowError("Invalid email address.");
                 return;
             }
 
-            newCustomer.EmailAddress = txtEmailAddress.Text;
+            newCustomer.EmailAddress = emailAddress;
             newCustomer.PhoneNumber = txtPhoneNumber.Text;
             newCustomer.ShippingAddress = txtShippingAddress.Text;
             newCustomer.AccountCreationDate = DateTime.Parse(txtAccountCreationDate.Text); // Converting string to DateTime
@@ -62,6 +63,21 @@ public partial class _1_DataEntry : Page
         chkIsActive.Checked = false;
     }
 
+    // Validate email address format
+    private bool IsValidEmail(string email)
+    {
+        try
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    // Define the ShowError method
     private void ShowError(string message)
     {
         lblError.Visible = true;
