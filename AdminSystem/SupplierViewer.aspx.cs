@@ -25,7 +25,7 @@ public partial class _1_SupplierViewer : Page
                               "Contact Name: " + supplier.ContactName + "<br>" +
                               "Contact Phone: " + supplier.ContactPhone + "<br>" +
                               "Contact Email: " + supplier.ContactEmail + "<br>" +
-                              "Address: " + supplier.Address + "<br>" +
+                              "Address: " + supplier.SupplierAddress + "<br>" +
                               "Is Active: " + (supplier.IsActive ? "Yes" : "No") + "<br>";
 
         return supplierInfo; // Return the formatted string

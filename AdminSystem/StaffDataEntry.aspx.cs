@@ -19,7 +19,7 @@ public partial class _1_StaffDataEntry : Page
             clsStaff newStaff = new clsStaff();
 
             // Convert and capture data, handling any necessary type conversions
-            newStaff.EmployeeID = int.Parse(txtEmployeeID.Text); // Converting string to integer
+            newStaff.EmployeeId = int.Parse(txtEmployeeID.Text); // Converting string to integer
             newStaff.FullName = txtFullName.Text;
             newStaff.Role = txtRole.Text;
             newStaff.ContactPhone = txtContactPhone.Text;

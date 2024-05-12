@@ -25,7 +25,7 @@ public partial class _1_SupplierDataEntry : Page
             newSupplier.ContactName = txtContactName.Text;
             newSupplier.ContactPhone = txtContactPhone.Text;
             newSupplier.ContactEmail = txtContactEmail.Text;
-            newSupplier.Address = txtAddress.Text;
+            newSupplier.SupplierAddress = txtAddress.Text;
             newSupplier.IsActive = chkIsActive.Checked;
 
             // Store in session

@@ -20,7 +20,7 @@ public partial class _1_StaffViewer : Page
         }
 
         // Create a formatted string with staff information
-        string staffInfo = "Employee ID: " + staff.EmployeeID + "<br>" +
+        string staffInfo = "Employee ID: " + staff.EmployeeId + "<br>" +
                            "Full Name: " + staff.FullName + "<br>" +
                            "Role: " + staff.Role + "<br>" +
                            "Contact Phone: " + staff.ContactPhone + "<br>" +
