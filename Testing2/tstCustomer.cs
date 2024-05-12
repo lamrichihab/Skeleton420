@@ -85,5 +85,129 @@ namespace Testing6
             ACustomer.IsActive = TestData;
             Assert.AreEqual(TestData, ACustomer.IsActive, "Is Active should match the assigned value.");
         }
+        public void FindMethodOK()
+        {
+            // Create an instance of the class we want to test
+            clsCustomer newCustomer = new clsCustomer();
+
+            // Create some test data to use with the method
+            int CustomerID = 1;
+
+            // Invoke the method
+            bool Found = newCustomer.Find(CustomerID);
+
+            // Test to see if the result is true
+            Assert.IsTrue(Found);
+        }
+        [TestMethod]
+        public void TestCustomerIDFound()
+        {
+            // Create an instance of the class we want to create
+            clsCustomer newCustomer = new clsCustomer();
+
+            // Create some test data to use with the method
+            int CustomerID = 1;
+
+            // Invoke the method
+            newCustomer.Find(CustomerID);
+
+            // Test to see if the result is correct
+            Assert.AreEqual(newCustomer.CustomerID, CustomerID);
+        }
+
+        [TestMethod]
+        public void TestFullNameFound()
+        {
+            // Create an instance of the class we want to create
+            clsCustomer newCustomer = new clsCustomer();
+
+            // Create some test data to use with the method
+            int CustomerID = 1;
+
+            // Invoke the method
+            newCustomer.Find(CustomerID);
+
+            // Test to see if the result is correct
+            Assert.AreEqual(newCustomer.FullName, "John Doe");
+        }
+
+        [TestMethod]
+        public void TestEmailAddressFound()
+        {
+            // Create an instance of the class we want to create
+            clsCustomer newCustomer = new clsCustomer();
+
+            // Create some test data to use with the method
+            int CustomerID = 1;
+
+            // Invoke the method
+            newCustomer.Find(CustomerID);
+
+            // Test to see if the result is correct
+            Assert.AreEqual(newCustomer.EmailAddress, "john.doe@example.com");
+        }
+
+        [TestMethod]
+        public void TestPhoneNumberFound()
+        {
+            // Create an instance of the class we want to create
+            clsCustomer newCustomer = new clsCustomer();
+
+            // Create some test data to use with the method
+            int CustomerID = 1;
+
+            // Invoke the method
+            newCustomer.Find(CustomerID);
+
+            // Test to see if the result is correct
+            Assert.AreEqual(newCustomer.PhoneNumber, "123-456-789");
+        }
+
+        [TestMethod]
+        public void TestShippingAddressFound()
+        {
+            // Create an instance of the class we want to create
+            clsCustomer newCustomer = new clsCustomer();
+
+            // Create some test data to use with the method
+            int CustomerID = 1;
+
+            // Invoke the method
+            newCustomer.Find(CustomerID);
+
+            // Test to see if the result is correct
+            Assert.AreEqual(newCustomer.ShippingAddress, "123 Main St, City, Country");
+        }
+
+        [TestMethod]
+        public void TestAccountCreationDateFound()
+        {
+            // Create an instance of the class we want to create
+            clsCustomer newCustomer = new clsCustomer();
+
+            // Create some test data to use with the method
+            int CustomerID = 1;
+
+            // Invoke the method
+            newCustomer.Find(CustomerID);
+
+            // Test to see if the result is correct
+            Assert.AreEqual(newCustomer.AccountCreationDate, Convert.ToDateTime("2022-05-08"));
+        }
+
+        [TestMethod]
+        public void TestIsActiveFound()
+        {
+            // Create an instance of the class we want to create
+            clsCustomer newCustomer = new clsCustomer();
+
+            // Create some test data to use with the method
+            int CustomerID = 1;
+
+            // Invoke the method
+            newCustomer.Find(CustomerID);
+
+            // Test to see if the
+        }
     }
 }

@@ -96,10 +96,10 @@ namespace Testing6
             string testData = "123 Main St";
 
             // Act
-            supplier.Address = testData;
+            supplier.SupplierAddress = testData;
 
             // Assert
-            Assert.AreEqual(supplier.Address, testData);
+            Assert.AreEqual(supplier.SupplierAddress, testData);
         }
 
         [TestMethod]
@@ -114,6 +114,174 @@ namespace Testing6
 
             // Assert
             Assert.AreEqual(supplier.IsActive, testData);
+        } // Find method test
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            // Create an instance of the class we want to create
+            clsSupplier supplier = new clsSupplier();
+            // Create a Boolean variable to store the results of the validation
+            bool Found = false;
+            // Create some test data to use with the method
+            int SupplierID = 1;
+            // Invoke the method
+            Found = supplier.Find(SupplierID);
+            // Test to see if the result is true
+            Assert.IsTrue(Found);
+        }
+        // Property data tests
+        [TestMethod]
+        public void TestSupplierIDFound()
+        {
+            // Create an instance of the class we want to create
+            clsSupplier supplier = new clsSupplier();
+            // Create a Boolean variable to store the result of the search
+            bool Found = false;
+            // Create a Boolean variable to record if the data is OK (assume it is)
+            bool OK = true;
+            // Create some test data to use with the method
+            int SupplierID = 1;
+            // Invoke the method
+            Found = supplier.Find(SupplierID);
+            // Check the SupplierID property
+            if (supplier.SupplierID != 1)
+            {
+                OK = false;
+            }
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestSupplierNameFound()
+        {
+            // Create an instance of the class we want to create
+            clsSupplier supplier = new clsSupplier();
+            // Create a Boolean variable to store the result of the search
+            bool Found = false;
+            // Create a Boolean variable to record if the data is OK (assume it is)
+            bool OK = true;
+            // Create some test data to use with the method
+            int SupplierID = 1;
+            // Invoke the method
+            Found = supplier.Find(SupplierID);
+            // Check the SupplierName property
+            if (supplier.SupplierName != "Test Supplier Name")
+            {
+                OK = false;
+            }
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestContactNameFound()
+        {
+            // Create an instance of the class we want to create
+            clsSupplier supplier = new clsSupplier();
+            // Create a Boolean variable to store the result of the search
+            bool Found = false;
+            // Create a Boolean variable to record if the data is OK (assume it is)
+            bool OK = true;
+            // Create some test data to use with the method
+            int SupplierID = 1;
+            // Invoke the method
+            Found = supplier.Find(SupplierID);
+            // Check the ContactName property
+            if (supplier.ContactName != "Test Contact Name")
+            {
+                OK = false;
+            }
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestContactEmailFound()
+        {
+            // Create an instance of the class we want to create
+            clsSupplier supplier = new clsSupplier();
+            // Create a Boolean variable to store the result of the search
+            bool Found = false;
+            // Create a Boolean variable to record if the data is OK (assume it is)
+            bool OK = true;
+            // Create some test data to use with the method
+            int SupplierID = 1;
+            // Invoke the method
+            Found = supplier.Find(SupplierID);
+            // Check the ContactEmail property
+            if (supplier.ContactEmail != "test@test.com")
+            {
+                OK = false;
+            }
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestContactPhoneFound()
+        {
+            // Create an instance of the class we want to create
+            clsSupplier supplier = new clsSupplier();
+            // Create a Boolean variable to store the result of the search
+            bool Found = false;
+            // Create a Boolean variable to record if the data is OK (assume it is)
+            bool OK = true;
+            // Create some test data to use with the method
+            int SupplierID = 1;
+            // Invoke the method
+            Found = supplier.Find(SupplierID);
+            // Check the ContactPhone property
+            if (supplier.ContactPhone != "123-456-789")
+            {
+                OK = false;
+            }
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestSupplierAddressFound()
+        {
+            // Create an instance of the class we want to create
+            clsSupplier supplier = new clsSupplier();
+            // Create a Boolean variable to store the result of the search
+            bool Found = false;
+            // Create a Boolean variable to record if the data is OK (assume it is)
+            bool OK = true;
+            // Create some test data to use with the method
+            int SupplierID = 1;
+            // Invoke the method
+            Found = supplier.Find(SupplierID);
+            // Check the SupplierAddress property
+            if (supplier.SupplierAddress != "Supplier Test Address")
+            {
+                OK = false;
+            }
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestIsActiveFound()
+        {
+            // Create an instance of the class we want to create
+            clsSupplier supplier = new clsSupplier();
+            // Create a Boolean variable to store the result of the search
+            bool Found = false;
+            // Create a Boolean variable to record if the data is OK (assume it is)
+            bool OK = true;
+            // Create some test data to use with the method
+            int SupplierID = 1;
+            // Invoke the method
+            Found = supplier.Find(SupplierID);
+            // Check the IsActive property
+            if (supplier.IsActive != true)
+            {
+                OK = false;
+            }
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
         }
     }
 }
