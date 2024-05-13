@@ -13,7 +13,7 @@
         </div>
         <p>
             <asp:Label ID="lblProductId" runat="server" Text="Product ID" style="display: inline-block; width: 120px;" />
-            <asp:TextBox ID="txtProductID" runat="server" style="width: 158px;" TextMode="Number" height="22px" />
+            <asp:TextBox ID="txtProductId" runat="server" style="width: 158px;" TextMode="Number" height="22px" />
         </p>
         <p>
             <asp:Label ID="lblOrderId" runat="server" Text="Order ID" style="display: inline-block; width: 120px;" />
