@@ -17,8 +17,13 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create a new istance of clsOrder
         clsOrder AnOrder = new clsOrder();
-        //capture OrderId
+        //capture infomation
         AnOrder.OrderId = Convert.ToInt32(txtOrderId.Text);
+        AnOrder.CustomerId = Convert.ToInt32(txtCustomerId.Text);
+        AnOrder.EmployeeId = Convert.ToInt32(txtEmployeeId.Text);
+        AnOrder.OrderDate = Convert.ToDateTime(DateTime.Now);
+        AnOrder.RequiredDate = Convert.ToDateTime(DateTime.Now);
+        AnOrder.Shipped = chkShipped.Checked;
         //store the ID in the session object
         Session["AnOrder"] = AnOrder;
         

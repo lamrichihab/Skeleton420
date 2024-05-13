@@ -13,7 +13,12 @@ public partial class _1Viewer : System.Web.UI.Page
         clsOrder AnOrder = new clsOrder();
         //get the data from the session object
         AnOrder = (clsOrder)Session["AnOrder"];
-        //display the Id for this entry
+        //display this entry
         Response.Write(AnOrder.OrderId);
+        Response.Write(AnOrder.CustomerId);
+        Response.Write(AnOrder.EmployeeId);
+        Response.Write(AnOrder.OrderDate);
+        Response.Write(AnOrder.RequiredDate);
+        Response.Write(AnOrder.Shipped);
     }
 }
