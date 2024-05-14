@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace ClassLibrary
 {
@@ -66,17 +67,33 @@ namespace ClassLibrary
         // Find method
         public bool Find(int SupplierID)
         {
-            // Set the private data members to the test data values
-            mSupplierID = 1;
-            mSupplierName = "Test Supplier Name";
-            mContactName = "Test Contact Name";
-            mContactEmail = "test@test.com";
-            mContactPhone = "123-456-789";
-            mSupplierAddress = "Supplier Test Address";
-            mIsActive = true;
-
-            // Always return true
-            return true;
+            // Create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            // Add the parameter for the supplier ID to search for
+            DB.AddParameter("@SupplierID", SupplierID);
+            // Execute the stored procedure
+            DB.Execute("sproc_tbSupplier_FilterBySupplierID");
+            // If one record is found (there should be one or zero)
+            if (DB.Count == 1)
+            {
+                // Copy the data from the database to the private data members
+                mSupplierID = Convert.ToInt32(DB.DataTable.Rows[0]["SupplierID"]);
+                mSupplierName = Convert.ToString(DB.DataTable.Rows[0]["SupplierName"]);
+                mContactName = Convert.ToString(DB.DataTable.Rows[0]["ContactName"]);
+                mContactPhone = Convert.ToString(DB.DataTable.Rows[0]["ContactPhone"]);
+                mSupplierAddress = Convert.ToString(DB.DataTable.Rows[0]["Address"]);
+                mContactEmail = Convert.ToString(DB.DataTable.Rows[0]["Email"]);
+                mIsActive = Convert.ToBoolean(DB.DataTable.Rows[0]["IsActive"]);
+                // Return that everything worked OK
+                return true;
+            }
+            // If no record was found
+            else
+            {
+                // Return false indicating there is a problem
+                return false;
+            }
         }
+
     }
 }
