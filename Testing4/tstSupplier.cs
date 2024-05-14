@@ -166,7 +166,7 @@ namespace Testing6
             // Invoke the method
             Found = supplier.Find(SupplierID);
             // Check the SupplierName property
-            if (supplier.SupplierName != "Test Supplier Name")
+            if (supplier.SupplierName != "Fashion Supplier Inc.")
             {
                 OK = false;
             }
@@ -188,7 +188,7 @@ namespace Testing6
             // Invoke the method
             Found = supplier.Find(SupplierID);
             // Check the ContactName property
-            if (supplier.ContactName != "Test Contact Name")
+            if (supplier.ContactName != "John Smith")
             {
                 OK = false;
             }
@@ -210,7 +210,7 @@ namespace Testing6
             // Invoke the method
             Found = supplier.Find(SupplierID);
             // Check the ContactEmail property
-            if (supplier.ContactEmail != "test@test.com")
+            if (supplier.ContactEmail != "john.smith@fashionsupplier.com")
             {
                 OK = false;
             }
@@ -232,7 +232,7 @@ namespace Testing6
             // Invoke the method
             Found = supplier.Find(SupplierID);
             // Check the ContactPhone property
-            if (supplier.ContactPhone != "123-456-789")
+            if (supplier.ContactPhone != "555-777-8888")
             {
                 OK = false;
             }
@@ -254,7 +254,7 @@ namespace Testing6
             // Invoke the method
             Found = supplier.Find(SupplierID);
             // Check the SupplierAddress property
-            if (supplier.SupplierAddress != "Supplier Test Address")
+            if (supplier.SupplierAddress != "123 Fashion Ave, Cityville, USA")
             {
                 OK = false;
             }

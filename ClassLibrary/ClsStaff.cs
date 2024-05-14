@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.OleDb;
 
 namespace ClassLibrary
 {
@@ -65,17 +66,32 @@ namespace ClassLibrary
         // FIND METHOD
         public bool Find(int EmployeeId)
         {
-            // Set the private data members to the test data value
-            mEmployeeId = 12345;
-            mFullName = "John Smith";
-            mRole = "Manager";
-            mContactPhone = "123-456-7890";
-            mContactEmail = "test@example.com";
-            mDepartment = "HR";
-            mIsActive = true;
-
-            // Always return true
-            return true;
+            // Create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            // Add the parameter for the employee id to search for
+            DB.AddParameter("@EmployeeId", EmployeeId);
+            // Execute the stored procedure
+            DB.Execute("sproc_tblStaff_FilterByEmployeeID");
+            // If one record is found (there should be one or zero)
+            if (DB.Count == 1)
+            {
+                // Copy the data from the database to the private data members
+                mEmployeeId = Convert.ToInt32(DB.DataTable.Rows[0]["EmployeeId"]);
+                mFullName = Convert.ToString(DB.DataTable.Rows[0]["FullName"]);
+                mRole = Convert.ToString(DB.DataTable.Rows[0]["Role"]);
+                mContactEmail = Convert.ToString(DB.DataTable.Rows[0]["ContactEmail"]);
+                mContactPhone = Convert.ToString(DB.DataTable.Rows[0]["ContactPhone"]);
+                mDepartment = Convert.ToString(DB.DataTable.Rows[0]["Department"]);
+                mIsActive = Convert.ToBoolean(DB.DataTable.Rows[0]["IsActive"]);
+                // Return that everything worked OK
+                return true;
+            }
+            // If no record was found
+            else
+            {
+                // Return false indicating there is a problem
+                return false;
+            }
         }
     }
 }
