@@ -83,4 +83,35 @@ public partial class _1_DataEntry : Page
         lblError.Visible = true;
         lblError.Text = message;
     }
+
+    protected void btnFind_Click(Object sender, EventArgs e)
+    {
+        // Create an instance of the customer class
+        clsCustomer ACustomer = new clsCustomer();
+
+        // Create a variable to store the customer ID
+        Int32 CustomerID;
+
+        // Create a variable to store the result of the find operation
+        Boolean Found = false;
+
+        // Get the customer ID entered by the user
+        CustomerID = Convert.ToInt32(txtCustomerID.Text);
+
+        // Find the record
+        Found = ACustomer.Find(CustomerID);
+
+        // If found
+        if (Found == true)
+        {
+            // Display values of properties in form
+            txtFullName.Text = ACustomer.FullName;
+            txtEmailAddress.Text = ACustomer.EmailAddress;
+            txtPhoneNumber.Text = ACustomer.PhoneNumber;
+            txtShippingAddress.Text = ACustomer.ShippingAddress;
+            txtAccountCreationDate.Text = ACustomer.AccountCreationDate.ToString("yyyy-MM-dd");
+            chkIsActive.Checked = ACustomer.IsActive;
+        }
+    }
+
 }
