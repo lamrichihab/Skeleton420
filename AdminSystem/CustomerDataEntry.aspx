@@ -4,6 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Customer Data Entry</title>
+    <style>
+        .findButton {
+            margin-left: 10px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -13,6 +18,7 @@
         <p>
             <asp:Label ID="lblCustomerID" runat="server" Text="Customer ID" style="display: inline-block; width: 120px;" />
             <asp:TextBox ID="txtCustomerID" runat="server" style="width: 150px;" TextMode="Number" />
+            <asp:Button ID="btnFind" runat="server" Text="Find" OnClick="btnFind_Click" CssClass="findButton" />
         </p>
         <p>
             <asp:Label ID="lblFullName" runat="server" Text="Full Name" style="display: inline-block; width: 120px;" />
@@ -40,14 +46,12 @@
         </p>
         <!-- Error message label -->
         <p>
-
             <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red" Visible="False" />
         </p>
         <!-- OK and Cancel buttons -->
         <p>
             <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" />
             <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
-
         </p>
     </form>
 </body>

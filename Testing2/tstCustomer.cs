@@ -85,9 +85,11 @@ namespace Testing6
             ACustomer.IsActive = TestData;
             Assert.AreEqual(TestData, ACustomer.IsActive, "Is Active should match the assigned value.");
         }
+
+        [TestMethod]
         public void FindMethodOK()
         {
-            // Create an instance of the class we want to test
+            // Create an instance of clsCustomer
             clsCustomer newCustomer = new clsCustomer();
 
             // Create some test data to use with the method
@@ -99,10 +101,11 @@ namespace Testing6
             // Test to see if the result is true
             Assert.IsTrue(Found);
         }
+
         [TestMethod]
         public void TestCustomerIDFound()
         {
-            // Create an instance of the class we want to create
+            // Create an instance of clsCustomer
             clsCustomer newCustomer = new clsCustomer();
 
             // Create some test data to use with the method
@@ -111,14 +114,14 @@ namespace Testing6
             // Invoke the method
             newCustomer.Find(CustomerID);
 
-            // Test to see if the result is correct
+            // Test to see if the CustomerID property is correct
             Assert.AreEqual(newCustomer.CustomerID, CustomerID);
         }
 
         [TestMethod]
         public void TestFullNameFound()
         {
-            // Create an instance of the class we want to create
+            // Create an instance of clsCustomer
             clsCustomer newCustomer = new clsCustomer();
 
             // Create some test data to use with the method
@@ -127,14 +130,14 @@ namespace Testing6
             // Invoke the method
             newCustomer.Find(CustomerID);
 
-            // Test to see if the result is correct
+            // Test to see if the FullName property is correct
             Assert.AreEqual(newCustomer.FullName, "John Doe");
         }
 
         [TestMethod]
         public void TestEmailAddressFound()
         {
-            // Create an instance of the class we want to create
+            // Create an instance of clsCustomer
             clsCustomer newCustomer = new clsCustomer();
 
             // Create some test data to use with the method
@@ -143,14 +146,14 @@ namespace Testing6
             // Invoke the method
             newCustomer.Find(CustomerID);
 
-            // Test to see if the result is correct
+            // Test to see if the EmailAddress property is correct
             Assert.AreEqual(newCustomer.EmailAddress, "john.doe@example.com");
         }
 
         [TestMethod]
         public void TestPhoneNumberFound()
         {
-            // Create an instance of the class we want to create
+            // Create an instance of clsCustomer
             clsCustomer newCustomer = new clsCustomer();
 
             // Create some test data to use with the method
@@ -159,14 +162,14 @@ namespace Testing6
             // Invoke the method
             newCustomer.Find(CustomerID);
 
-            // Test to see if the result is correct
-            Assert.AreEqual(newCustomer.PhoneNumber, "123-456-789");
+            // Test to see if the PhoneNumber property is correct
+            Assert.AreEqual(newCustomer.PhoneNumber, "123-456-7890");
         }
 
         [TestMethod]
         public void TestShippingAddressFound()
         {
-            // Create an instance of the class we want to create
+            // Create an instance of clsCustomer
             clsCustomer newCustomer = new clsCustomer();
 
             // Create some test data to use with the method
@@ -175,14 +178,14 @@ namespace Testing6
             // Invoke the method
             newCustomer.Find(CustomerID);
 
-            // Test to see if the result is correct
-            Assert.AreEqual(newCustomer.ShippingAddress, "123 Main St, City, Country");
+            // Test to see if the ShippingAddress property is correct
+            Assert.AreEqual(newCustomer.ShippingAddress, "123 Main St, Springfield, USA");
         }
 
         [TestMethod]
         public void TestAccountCreationDateFound()
         {
-            // Create an instance of the class we want to create
+            // Create an instance of clsCustomer
             clsCustomer newCustomer = new clsCustomer();
 
             // Create some test data to use with the method
@@ -191,14 +194,14 @@ namespace Testing6
             // Invoke the method
             newCustomer.Find(CustomerID);
 
-            // Test to see if the result is correct
-            Assert.AreEqual(newCustomer.AccountCreationDate, Convert.ToDateTime("2022-05-08"));
+            // Test to see if the AccountCreationDate property is correct
+            Assert.AreEqual(newCustomer.AccountCreationDate, Convert.ToDateTime("2024-01-01"));
         }
 
         [TestMethod]
         public void TestIsActiveFound()
         {
-            // Create an instance of the class we want to create
+            // Create an instance of clsCustomer
             clsCustomer newCustomer = new clsCustomer();
 
             // Create some test data to use with the method
@@ -207,7 +210,8 @@ namespace Testing6
             // Invoke the method
             newCustomer.Find(CustomerID);
 
-            // Test to see if the
+            // Test to see if the IsActive property is correct
+            Assert.IsTrue(newCustomer.IsActive);
         }
     }
 }
