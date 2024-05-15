@@ -14,6 +14,7 @@
         <p>
             <asp:Label ID="lblSupplierID" runat="server" Text="Supplier ID" style="display: inline-block; width: 120px;" />
             <asp:TextBox ID="txtSupplierID" runat="server" style="width: 150px;" TextMode="Number" />
+            <asp:Button ID="btnFind" runat="server" OnClick="Button1_Click" style="z-index: 1; left: 311px; top: 70px; position: absolute; width: 57px" Text="Find" />
         </p>
         <p>
             <asp:Label ID="lblSupplierName" runat="server" Text="Supplier Name" style="display: inline-block; width: 120px;" />

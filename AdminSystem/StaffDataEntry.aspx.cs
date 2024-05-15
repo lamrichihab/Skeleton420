@@ -61,4 +61,33 @@ public partial class _1_StaffDataEntry : Page
         lblError.Visible = true;
         lblError.Text = message;
     }
+
+    protected void BtnFind_Click(object sender, EventArgs e)
+    {
+        // Create an instance of the staff class
+        clsStaff AStaff = new clsStaff();
+
+        // Create a variable to store the primary key
+        Int32 StaffId;
+
+        // Create a variable to store the result of the find operation
+        Boolean Found = false;
+
+        // Get the primary key entered by the user
+        StaffId = Convert.ToInt32(txtEmployeeID.Text);
+
+        // Find the record
+        Found = AStaff.Find(StaffId);
+
+        // If found, display the values of the properties in the form
+        if (Found == true)
+        {
+            txtFullName.Text = AStaff.FullName;
+            txtRole.Text = AStaff.Role;
+            txtContactPhone.Text = AStaff.ContactPhone;
+            txtContactEmail.Text = AStaff.ContactEmail;
+            txtDepartment.Text = AStaff.Department;
+            chkIsActive.Checked = AStaff.IsActive;
+        }
+    }
 }

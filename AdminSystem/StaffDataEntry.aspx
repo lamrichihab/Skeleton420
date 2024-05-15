@@ -4,6 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Staff Data Entry</title>
+    <style type="text/css">
+        .findButton {}
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -13,6 +16,7 @@
         <p>
             <asp:Label ID="lblEmployeeID" runat="server" Text="Employee ID" style="display: inline-block; width: 120px;" />
             <asp:TextBox ID="txtEmployeeID" runat="server" style="width: 150px;" TextMode="Number" />
+            <asp:Button ID="BtnFind" runat="server" OnClick="BtnFind_Click" style="z-index: 1; left: 306px; top: 70px; position: absolute; width: 62px" Text="FIND" />
         </p>
         <p>
             <asp:Label ID="lblFullName" runat="server" Text="Full Name" style="display: inline-block; width: 120px;" />
