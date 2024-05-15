@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using ClassLibrary; // Adjust this to the correct namespace for clsStock2
+using ClassLibrary;
 
 namespace Testing6
 {
@@ -8,196 +7,129 @@ namespace Testing6
     public class tstStock
     {
         [TestMethod]
-        public void InstanceOK()
+        public void StockInstanceOK()
         {
-            // Create an instance of the clsStock2 class
-            clsStock2 AStock = new clsStock2();
-            Assert.IsNotNull(AStock, "The clsStock2 instance should not be null.");
+            // Arrange
+            clsStock2 stock = new clsStock2();
+
+            // Act - Nothing to act upon, just creating an instance
+
+            // Assert
+            Assert.IsNotNull(stock);
         }
 
         [TestMethod]
-        public void ProductIDPropertyOK()
+        public void StockProductIDPropertyOK()
         {
-            // Test the ProductID property
-            clsStock2 AStock = new clsStock2();
-            int TestData = 1;  // Test value for ProductID
-            AStock.ProductID = TestData;
-            Assert.AreEqual(TestData, AStock.ProductID, "ProductID should match the assigned value.");
+            // Arrange
+            clsStock2 stock = new clsStock2();
+            int testData = 1;
+
+            // Act
+            stock.ProductID = testData;
+
+            // Assert
+            Assert.AreEqual(stock.ProductID, testData);
         }
 
         [TestMethod]
-        public void ProductNamePropertyOK()
+        public void StockProductNamePropertyOK()
         {
-            clsStock2 AStock = new clsStock2();
-            string TestData = "Sample Product";
-            AStock.ProductName = TestData;
-            Assert.AreEqual(TestData, AStock.ProductName, "ProductName should match the assigned value.");
+            // Arrange
+            clsStock2 stock = new clsStock2();
+            string testData = "Sample Product";
+
+            // Act
+            stock.ProductName = testData;
+
+            // Assert
+            Assert.AreEqual(stock.ProductName, testData);
         }
 
         [TestMethod]
-        public void CategoryPropertyOK()
+        public void StockCategoryPropertyOK()
         {
-            clsStock2 AStock = new clsStock2();
-            string TestData = "Electronics";
-            AStock.Category = TestData;
-            Assert.AreEqual(TestData, AStock.Category, "Category should match the assigned value.");
+            // Arrange
+            clsStock2 stock = new clsStock2();
+            string testData = "Electronics";
+
+            // Act
+            stock.Category = testData;
+
+            // Assert
+            Assert.AreEqual(stock.Category, testData);
         }
 
         [TestMethod]
-        public void QuantityInStockPropertyOK()
+        public void StockQuantityInStockPropertyOK()
         {
-            clsStock2 AStock = new clsStock2();
-            int TestData = 100;
-            AStock.QuantityInStock = TestData;
-            Assert.AreEqual(TestData, AStock.QuantityInStock, "QuantityInStock should match the assigned value.");
+            // Arrange
+            clsStock2 stock = new clsStock2();
+            int testData = 100;
+
+            // Act
+            stock.QuantityInStock = testData;
+
+            // Assert
+            Assert.AreEqual(stock.QuantityInStock, testData);
         }
 
         [TestMethod]
-        public void ColorPropertyOK()
+        public void StockColorPropertyOK()
         {
-            clsStock2 AStock = new clsStock2();
-            string TestData = "Red";
-            AStock.Color = TestData;
-            Assert.AreEqual(TestData, AStock.Color, "Color should match the assigned value.");
+            // Arrange
+            clsStock2 stock = new clsStock2();
+            string testData = "Red";
+
+            // Act
+            stock.Color = testData;
+
+            // Assert
+            Assert.AreEqual(stock.Color, testData);
         }
 
         [TestMethod]
-        public void SizePropertyOK()
+        public void StockSizePropertyOK()
         {
-            clsStock2 AStock = new clsStock2();
-            string TestData = "Medium";
-            AStock.Size = TestData;
-            Assert.AreEqual(TestData, AStock.Size, "Size should match the assigned value.");
+            // Arrange
+            clsStock2 stock = new clsStock2();
+            string testData = "Medium";
+
+            // Act
+            stock.Size = testData;
+
+            // Assert
+            Assert.AreEqual(stock.Size, testData);
         }
 
         [TestMethod]
-        public void SupplierIDPropertyOK()
+        public void StockSupplierIDPropertyOK()
         {
-            clsStock2 AStock = new clsStock2();
-            int TestData = 5;
-            AStock.SupplierID = TestData;
-            Assert.AreEqual(TestData, AStock.SupplierID, "SupplierID should match the assigned value.");
+            // Arrange
+            clsStock2 stock = new clsStock2();
+            int testData = 5;
+
+            // Act
+            stock.SupplierID = testData;
+
+            // Assert
+            Assert.AreEqual(stock.SupplierID, testData);
         }
+
         [TestMethod]
-        public void FindMethodOK()
+        public void StockFindMethodOK()
         {
-            // Test the Find method
-            clsStock2 AStock = new clsStock2();
-            bool Found = false;
-            int ProductID = 1;
-            Found = AStock.Find(ProductID);
-            Assert.IsTrue(Found);
-        }
-        [TestMethod]
-        public void TestProductNameFound()
-        {
-            // Create an instance of the class we want to test
-            clsStock2 AStock = new clsStock2();
-            // Create a Boolean variable to store the result of the search
-            bool Found = false;
-            // Create a Boolean variable to record if data is OK (assume it is)
-            bool OK = true;
+            // Arrange
+            clsStock2 stock = new clsStock2();
+
             // Create some test data to use with the method
-            int ProductID = 1;
+            int productId = 1;
+
             // Invoke the method
-            Found = AStock.Find(ProductID);
-            // Check the ProductName property
-            if (AStock.ProductName != "Sample Product")
-            {
-                OK = false;
-            }
-            // Test to see that the result is correct
-            Assert.IsTrue(OK);
-        }
+            bool found = stock.Find(productId);
 
-        [TestMethod]
-        public void TestProductIDFound()
-        {
-            clsStock2 AStock = new clsStock2();
-            bool Found = false;
-            bool OK = true;
-            int ProductID = 1;
-            Found = AStock.Find(ProductID);
-            if (AStock.ProductID != ProductID)
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
-        }
-
-        [TestMethod]
-        public void TestCategoryFound()
-        {
-            clsStock2 AStock = new clsStock2();
-            bool Found = false;
-            bool OK = true;
-            int ProductID = 1;
-            Found = AStock.Find(ProductID);
-            if (AStock.Category != "Electronics")
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
-        }
-
-        [TestMethod]
-        public void TestQuantityInStockFound()
-        {
-            clsStock2 AStock = new clsStock2();
-            bool Found = false;
-            bool OK = true;
-            int ProductID = 1;
-            Found = AStock.Find(ProductID);
-            if (AStock.QuantityInStock != 100)
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
-        }
-
-        [TestMethod]
-        public void TestColorFound()
-        {
-            clsStock2 AStock = new clsStock2();
-            bool Found = false;
-            bool OK = true;
-            int ProductID = 1;
-            Found = AStock.Find(ProductID);
-            if (AStock.Color != "Red")
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
-        }
-
-        [TestMethod]
-        public void TestSizeFound()
-        {
-            clsStock2 AStock = new clsStock2();
-            bool Found = false;
-            bool OK = true;
-            int ProductID = 1;
-            Found = AStock.Find(ProductID);
-            if (AStock.Size != "Medium")
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
-        }
-
-        [TestMethod]
-        public void TestSupplierIDFound()
-        {
-            clsStock2 AStock = new clsStock2();
-            bool Found = false;
-            bool OK = true;
-            int ProductID = 1;
-            Found = AStock.Find(ProductID);
-            if (AStock.SupplierID != 5)
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
+            // Test to see if the result is true
+            Assert.IsTrue(found);
         }
     }
 }

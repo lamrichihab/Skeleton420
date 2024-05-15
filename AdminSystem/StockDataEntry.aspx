@@ -14,6 +14,7 @@
         <p>
             <asp:Label ID="lblProductID" runat="server" Text="Product ID" style="display: inline-block; width: 120px;" />
             <asp:TextBox ID="txtProductID" runat="server" style="width: 150px;" TextMode="Number" />
+            <asp:Button ID="btnFind" runat="server" Text="Find" OnClick="btnFind_Click" CssClass="findButton" />
         </p>
         <p>
             <asp:Label ID="lblProductName" runat="server" Text="Product Name" style="display: inline-block; width: 120px;" />

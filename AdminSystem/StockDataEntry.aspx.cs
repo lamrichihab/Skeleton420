@@ -61,4 +61,49 @@ public partial class _1_DataEntry : Page
         lblError.Visible = true;
         lblError.Text = message;
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            // Create an instance of the stock class
+            clsStock2 newStock = new clsStock2();
+
+            // Create a variable to store the product ID
+            int productID;
+
+            // Create a variable to store the result of the find operation
+            bool found = false;
+
+            // Get the product ID entered by the user
+            productID = Convert.ToInt32(txtProductID.Text);
+
+            // Find the record
+            found = newStock.Find(productID);
+
+            // If found
+            if (found)
+            {
+                // Display values of properties in form
+                txtProductName.Text = newStock.ProductName;
+                txtCategory.Text = newStock.Category;
+                txtQuantityInStock.Text = newStock.QuantityInStock.ToString();
+                txtColor.Text = newStock.Color;
+                txtSize.Text = newStock.Size;
+                txtSupplierID.Text = newStock.SupplierID.ToString();
+            }
+            else
+            {
+                ShowError("Product ID not found.");
+            }
+        }
+        catch (FormatException)
+        {
+            ShowError("Invalid data format. Please enter a valid Product ID.");
+        }
+        catch (Exception ex)
+        {
+            ShowError("An unexpected error occurred: " + ex.Message);
+        }
+    }
 }

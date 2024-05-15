@@ -72,7 +72,7 @@ namespace ClassLibrary
             // Add the parameter for the supplier ID to search for
             DB.AddParameter("@SupplierID", SupplierID);
             // Execute the stored procedure
-            DB.Execute("sproc_tbSupplier_FilterBySupplierID");
+            DB.Execute("sproc_tblSupplier_FilterBySupplierID");
             // If one record is found (there should be one or zero)
             if (DB.Count == 1)
             {
@@ -82,7 +82,7 @@ namespace ClassLibrary
                 mContactName = Convert.ToString(DB.DataTable.Rows[0]["ContactName"]);
                 mContactPhone = Convert.ToString(DB.DataTable.Rows[0]["ContactPhone"]);
                 mSupplierAddress = Convert.ToString(DB.DataTable.Rows[0]["Address"]);
-                mContactEmail = Convert.ToString(DB.DataTable.Rows[0]["Email"]);
+                mContactEmail = Convert.ToString(DB.DataTable.Rows[0]["ContactEmail"]);
                 mIsActive = Convert.ToBoolean(DB.DataTable.Rows[0]["IsActive"]);
                 // Return that everything worked OK
                 return true;
