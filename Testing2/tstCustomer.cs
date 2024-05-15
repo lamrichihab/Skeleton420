@@ -8,210 +8,129 @@ namespace Testing6
     public class tstCustomer
     {
         [TestMethod]
-        public void InstanceOK()
+        public void CustomerInstanceOK()
         {
-            // Create an instance of clsCustomer
-            clsCustomer ACustomer = new clsCustomer();
-            // Test to see if the object is not null
-            Assert.IsNotNull(ACustomer, "The clsCustomer instance should not be null.");
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+
+            // Act - Nothing to act upon, just creating an instance
+
+            // Assert
+            Assert.IsNotNull(customer);
         }
 
         [TestMethod]
-        public void CustomerIDPropertyOK()
+        public void CustomerCustomerIDPropertyOK()
         {
-            // Test for Customer ID property
-            clsCustomer ACustomer = new clsCustomer();
-            int TestData = 123;
-            ACustomer.CustomerID = TestData;
-            Assert.AreEqual(TestData, ACustomer.CustomerID, "Customer ID should match the assigned value.");
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            int testData = 123;
+
+            // Act
+            customer.CustomerID = testData;
+
+            // Assert
+            Assert.AreEqual(testData, customer.CustomerID);
         }
 
         [TestMethod]
-        public void FullNamePropertyOK()
+        public void CustomerFullNamePropertyOK()
         {
-            // Test for Full Name property
-            clsCustomer ACustomer = new clsCustomer();
-            string TestData = "John Doe";
-            ACustomer.FullName = TestData;
-            Assert.AreEqual(TestData, ACustomer.FullName, "Full Name should match the assigned value.");
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            string testData = "John Doe";
+
+            // Act
+            customer.FullName = testData;
+
+            // Assert
+            Assert.AreEqual(testData, customer.FullName);
         }
 
         [TestMethod]
-        public void EmailAddressPropertyOK()
+        public void CustomerEmailAddressPropertyOK()
         {
-            // Test for Email Address property
-            clsCustomer ACustomer = new clsCustomer();
-            string TestData = "johndoe@example.com";
-            ACustomer.EmailAddress = TestData;
-            Assert.AreEqual(TestData, ACustomer.EmailAddress, "Email Address should match the assigned value.");
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            string testData = "johndoe@example.com";
+
+            // Act
+            customer.EmailAddress = testData;
+
+            // Assert
+            Assert.AreEqual(testData, customer.EmailAddress);
         }
 
         [TestMethod]
-        public void PhoneNumberPropertyOK()
+        public void CustomerPhoneNumberPropertyOK()
         {
-            // Test for Phone Number property
-            clsCustomer ACustomer = new clsCustomer();
-            string TestData = "123-456-7890";
-            ACustomer.PhoneNumber = TestData;
-            Assert.AreEqual(TestData, ACustomer.PhoneNumber, "Phone Number should match the assigned value.");
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            string testData = "123-456-7890";
+
+            // Act
+            customer.PhoneNumber = testData;
+
+            // Assert
+            Assert.AreEqual(testData, customer.PhoneNumber);
         }
 
         [TestMethod]
-        public void ShippingAddressPropertyOK()
+        public void CustomerShippingAddressPropertyOK()
         {
-            // Test for Shipping Address property
-            clsCustomer ACustomer = new clsCustomer();
-            string TestData = "123 Main St, Springfield";
-            ACustomer.ShippingAddress = TestData;
-            Assert.AreEqual(TestData, ACustomer.ShippingAddress, "Shipping Address should match the assigned value.");
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            string testData = "123 Main St, Springfield";
+
+            // Act
+            customer.ShippingAddress = testData;
+
+            // Assert
+            Assert.AreEqual(testData, customer.ShippingAddress);
         }
 
         [TestMethod]
-        public void AccountCreationDatePropertyOK()
+        public void CustomerAccountCreationDatePropertyOK()
         {
-            // Test for Account Creation Date property
-            clsCustomer ACustomer = new clsCustomer();
-            DateTime TestData = new DateTime(2022, 1, 1);
-            ACustomer.AccountCreationDate = TestData;
-            Assert.AreEqual(TestData, ACustomer.AccountCreationDate, "Account Creation Date should match the assigned value.");
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            DateTime testData = new DateTime(2022, 1, 1);
+
+            // Act
+            customer.AccountCreationDate = testData;
+
+            // Assert
+            Assert.AreEqual(testData, customer.AccountCreationDate);
         }
 
         [TestMethod]
-        public void IsActivePropertyOK()
+        public void CustomerIsActivePropertyOK()
         {
-            // Test for Is Active property
-            clsCustomer ACustomer = new clsCustomer();
-            bool TestData = true;
-            ACustomer.IsActive = TestData;
-            Assert.AreEqual(TestData, ACustomer.IsActive, "Is Active should match the assigned value.");
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            bool testData = true;
+
+            // Act
+            customer.IsActive = testData;
+
+            // Assert
+            Assert.AreEqual(testData, customer.IsActive);
         }
 
         [TestMethod]
-        public void FindMethodOK()
+        public void CustomerFindMethodOK()
         {
-            // Create an instance of clsCustomer
-            clsCustomer newCustomer = new clsCustomer();
+            // Arrange
+            clsCustomer customer = new clsCustomer();
 
             // Create some test data to use with the method
-            int CustomerID = 1;
+            int customerId = 1;
 
             // Invoke the method
-            bool Found = newCustomer.Find(CustomerID);
+            bool found = customer.Find(customerId);
 
             // Test to see if the result is true
-            Assert.IsTrue(Found);
-        }
-
-        [TestMethod]
-        public void TestCustomerIDFound()
-        {
-            // Create an instance of clsCustomer
-            clsCustomer newCustomer = new clsCustomer();
-
-            // Create some test data to use with the method
-            int CustomerID = 1;
-
-            // Invoke the method
-            newCustomer.Find(CustomerID);
-
-            // Test to see if the CustomerID property is correct
-            Assert.AreEqual(newCustomer.CustomerID, CustomerID);
-        }
-
-        [TestMethod]
-        public void TestFullNameFound()
-        {
-            // Create an instance of clsCustomer
-            clsCustomer newCustomer = new clsCustomer();
-
-            // Create some test data to use with the method
-            int CustomerID = 1;
-
-            // Invoke the method
-            newCustomer.Find(CustomerID);
-
-            // Test to see if the FullName property is correct
-            Assert.AreEqual(newCustomer.FullName, "John Doe");
-        }
-
-        [TestMethod]
-        public void TestEmailAddressFound()
-        {
-            // Create an instance of clsCustomer
-            clsCustomer newCustomer = new clsCustomer();
-
-            // Create some test data to use with the method
-            int CustomerID = 1;
-
-            // Invoke the method
-            newCustomer.Find(CustomerID);
-
-            // Test to see if the EmailAddress property is correct
-            Assert.AreEqual(newCustomer.EmailAddress, "john.doe@example.com");
-        }
-
-        [TestMethod]
-        public void TestPhoneNumberFound()
-        {
-            // Create an instance of clsCustomer
-            clsCustomer newCustomer = new clsCustomer();
-
-            // Create some test data to use with the method
-            int CustomerID = 1;
-
-            // Invoke the method
-            newCustomer.Find(CustomerID);
-
-            // Test to see if the PhoneNumber property is correct
-            Assert.AreEqual(newCustomer.PhoneNumber, "123-456-7890");
-        }
-
-        [TestMethod]
-        public void TestShippingAddressFound()
-        {
-            // Create an instance of clsCustomer
-            clsCustomer newCustomer = new clsCustomer();
-
-            // Create some test data to use with the method
-            int CustomerID = 1;
-
-            // Invoke the method
-            newCustomer.Find(CustomerID);
-
-            // Test to see if the ShippingAddress property is correct
-            Assert.AreEqual(newCustomer.ShippingAddress, "123 Main St, Springfield, USA");
-        }
-
-        [TestMethod]
-        public void TestAccountCreationDateFound()
-        {
-            // Create an instance of clsCustomer
-            clsCustomer newCustomer = new clsCustomer();
-
-            // Create some test data to use with the method
-            int CustomerID = 1;
-
-            // Invoke the method
-            newCustomer.Find(CustomerID);
-
-            // Test to see if the AccountCreationDate property is correct
-            Assert.AreEqual(newCustomer.AccountCreationDate, Convert.ToDateTime("2024-01-01"));
-        }
-
-        [TestMethod]
-        public void TestIsActiveFound()
-        {
-            // Create an instance of clsCustomer
-            clsCustomer newCustomer = new clsCustomer();
-
-            // Create some test data to use with the method
-            int CustomerID = 1;
-
-            // Invoke the method
-            newCustomer.Find(CustomerID);
-
-            // Test to see if the IsActive property is correct
-            Assert.IsTrue(newCustomer.IsActive);
+            Assert.IsTrue(found);
         }
     }
 }

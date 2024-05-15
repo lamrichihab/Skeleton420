@@ -70,25 +70,34 @@ namespace ClassLibrary // Adjust to your project's namespace
         // Find method
         public bool Find(int ProductID)
         {
-            // Assume the method will return false
-            bool Found = false;
-            // Check if the Product ID is 1
-            if (ProductID == 1)
+            // Create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            // Add the parameter for the product ID to search for
+            DB.AddParameter("@ProductID", ProductID);
+            // Execute the stored procedure or query to retrieve data
+            DB.Execute("sproc_tblStock_FilterByProductID");
+
+            // If one record is found (there should be either one or zero)
+            if (DB.Count == 1)
             {
-                // Set the properties
-                mProductID = 1;
-                mProductName = "Sample Product";
-                mCategory = "Electronics";
-                mQuantityInStock = 100;
-                mColor = "Red";
-                mSize = "Medium";
-                mSupplierID = 5;
-                // Indicate that the data was found
-                Found = true;
+                // Copy the data from the database to the private data members
+                mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
+                mProductName = Convert.ToString(DB.DataTable.Rows[0]["ProductName"]);
+                mCategory = Convert.ToString(DB.DataTable.Rows[0]["Category"]);
+                mQuantityInStock = Convert.ToInt32(DB.DataTable.Rows[0]["QuantityInStock"]);
+                mColor = Convert.ToString(DB.DataTable.Rows[0]["Color"]);
+                mSize = Convert.ToString(DB.DataTable.Rows[0]["Size"]);
+                mSupplierID = Convert.ToInt32(DB.DataTable.Rows[0]["SupplierID"]);
+
+                // Return that everything worked OK
+                return true;
             }
-            // Return whether the data was found
-            return Found;
+            // If no record was found
+            else
+            {
+                // Return false indicating there is a problem
+                return false;
+            }
         }
     }
 }
-

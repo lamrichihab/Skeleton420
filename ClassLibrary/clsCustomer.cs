@@ -1,149 +1,99 @@
 ﻿using System;
+using System.Data.OleDb;
 
 namespace ClassLibrary
 {
     public class clsCustomer
     {
-        // Private data member for the customer ID property
-        private Int32 mCustomerID;
+        // Private data members for the properties
+        private int mCustomerID;
+        private string mFullName;
+        private string mEmailAddress;
+        private string mPhoneNumber;
+        private string mShippingAddress;
+        private DateTime mAccountCreationDate;
+        private bool mIsActive;
 
-        // CustomerID public property
+        // CustomerID property
         public int CustomerID
         {
-            get
-            {
-                // This line of code sends data out of the property
-                return mCustomerID;
-            }
-            set
-            {
-                // This line of code allows data into the property
-                mCustomerID = value;
-            }
+            get { return mCustomerID; }
+            set { mCustomerID = value; }
         }
 
-        // Private data member for the full name property
-        private string mFullName;
-
-        // FullName public property
+        // FullName property
         public string FullName
         {
-            get
-            {
-                // This line of code sends data out of the property
-                return mFullName;
-            }
-            set
-            {
-                // This line of code allows data into the property
-                mFullName = value;
-            }
+            get { return mFullName; }
+            set { mFullName = value; }
         }
 
-        // Private data member for the email address property
-        private string mEmailAddress;
-
-        // EmailAddress public property
+        // EmailAddress property
         public string EmailAddress
         {
-            get
-            {
-                // This line of code sends data out of the property
-                return mEmailAddress;
-            }
-            set
-            {
-                // This line of code allows data into the property
-                mEmailAddress = value;
-            }
+            get { return mEmailAddress; }
+            set { mEmailAddress = value; }
         }
 
-        // Private data member for the phone number property
-        private string mPhoneNumber;
-
-        // PhoneNumber public property
+        // PhoneNumber property
         public string PhoneNumber
         {
-            get
-            {
-                // This line of code sends data out of the property
-                return mPhoneNumber;
-            }
-            set
-            {
-                // This line of code allows data into the property
-                mPhoneNumber = value;
-            }
+            get { return mPhoneNumber; }
+            set { mPhoneNumber = value; }
         }
 
-        // Private data member for the shipping address property
-        private string mShippingAddress;
-
-        // ShippingAddress public property
+        // ShippingAddress property
         public string ShippingAddress
         {
-            get
-            {
-                // This line of code sends data out of the property
-                return mShippingAddress;
-            }
-            set
-            {
-                // This line of code allows data into the property
-                mShippingAddress = value;
-            }
+            get { return mShippingAddress; }
+            set { mShippingAddress = value; }
         }
 
-        // Private data member for the account creation date property
-        private DateTime mAccountCreationDate;
-
-        // AccountCreationDate public property
+        // AccountCreationDate property
         public DateTime AccountCreationDate
         {
-            get
-            {
-                // This line of code sends data out of the property
-                return mAccountCreationDate;
-            }
-            set
-            {
-                // This line of code allows data into the property
-                mAccountCreationDate = value;
-            }
+            get { return mAccountCreationDate; }
+            set { mAccountCreationDate = value; }
         }
 
-        // Private data member for the is active property
-        private Boolean mIsActive;
-
-        // IsActive public property
+        // IsActive property
         public bool IsActive
         {
-            get
-            {
-                // This line of code sends data out of the property
-                return mIsActive;
-            }
-            set
-            {
-                // This line of code allows data into the property
-                mIsActive = value;
-            }
+            get { return mIsActive; }
+            set { mIsActive = value; }
         }
 
-        // FIND METHOD
+        // Find method
         public bool Find(int CustomerID)
         {
-            // Set the private data members to the test data value
-            mCustomerID = 1;
-            mFullName = "John Doe";
-            mEmailAddress = "john.doe@example.com";
-            mPhoneNumber = "123-456-7890";
-            mShippingAddress = "123 Main St, Springfield, USA";
-            mAccountCreationDate = Convert.ToDateTime("2024-01-01");
-            mIsActive = true;
+            // Create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            // Add the parameter for the customer ID to search for
+            DB.AddParameter("@CustomerID", CustomerID);
+            // Execute the stored procedure or query to retrieve data
+            DB.Execute("sproc_tblCustomer_FilterByCustomerID");
 
-            // Always return true
-            return true;
+            // If one record is found (there should be either one or zero)
+            if (DB.Count == 1)
+            {
+                // Copy the data from the database to the private data members
+                mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
+                mFullName = Convert.ToString(DB.DataTable.Rows[0]["FullName"]);
+                mEmailAddress = Convert.ToString(DB.DataTable.Rows[0]["EmailAddress"]);
+                mPhoneNumber = Convert.ToString(DB.DataTable.Rows[0]["PhoneNumber"]);
+                mShippingAddress = Convert.ToString(DB.DataTable.Rows[0]["ShippingAddress"]);
+                mAccountCreationDate = Convert.ToDateTime(DB.DataTable.Rows[0]["AccountCreationDate"]);
+                mIsActive = Convert.ToBoolean(DB.DataTable.Rows[0]["IsActive"]);
+
+                // Return that everything worked OK
+                return true;
+            }
+            // If no record was found
+            else
+            {
+                // Return false indicating there is a problem
+                return false;
+            }
         }
     }
 }
