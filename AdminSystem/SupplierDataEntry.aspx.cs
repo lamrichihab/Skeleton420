@@ -62,4 +62,33 @@ public partial class _1_SupplierDataEntry : Page
         lblError.Visible = true;
         lblError.Text = message;
     }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        // Create an instance of the supplier class
+        clsSupplier ASupplier = new clsSupplier();
+
+        // Create a variable to store the primary key
+        Int32 SupplierId;
+
+        // Create a variable to store the result of the find operation
+        Boolean Found = false;
+
+        // Get the primary key entered by the user
+        SupplierId = Convert.ToInt32(txtSupplierID.Text);
+
+        // Find the record
+        Found = ASupplier.Find(SupplierId);
+
+        // If found, display the values of the properties in the form
+        if (Found == true)
+        {
+            txtSupplierName.Text = ASupplier.SupplierName;
+            txtContactName.Text = ASupplier.ContactName;
+            txtContactPhone.Text = ASupplier.ContactPhone;
+            txtContactEmail.Text = ASupplier.ContactEmail;
+            txtAddress.Text = ASupplier.SupplierAddress;
+            chkIsActive.Checked = ASupplier.IsActive;
+        }
+    }
 }
