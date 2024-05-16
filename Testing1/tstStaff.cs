@@ -294,5 +294,18 @@ namespace Testing6
             // Test to see that the result is correct
             Assert.IsTrue(ok);
         }
+        [TestMethod]
+        public void TestStaffValidation()
+        {
+            // Arrange
+            clsStaff staff = new clsStaff();
+            string errorMessage;
+
+            // Act
+            errorMessage = staff.Valid(12345, "John Doe", "Manager", "123-456-7890", "test@example.com", "HR");
+
+            // Assert
+            Assert.AreEqual("", errorMessage, "Validation failed: " + errorMessage);
+        }
     }
 }
