@@ -132,5 +132,58 @@ namespace Testing6
             // Test to see if the result is true
             Assert.IsTrue(found);
         }
+        [TestMethod]
+        public void ValidMethodMissingEmailAddress()
+        {
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            customer.FullName = "John Doe";
+            customer.EmailAddress = ""; // Empty email address
+            customer.PhoneNumber = "123-456-7890";
+            customer.ShippingAddress = "123 Main St, Springfield";
+            // Set other properties as needed...
+
+            // Act
+            string error = customer.Valid();
+
+            // Assert
+            Assert.AreEqual("Email address is required.", error, "Validation should fail if email address is not provided.");
+        }
+
+        [TestMethod]
+        public void ValidMethodMissingPhoneNumber()
+        {
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            customer.FullName = "John Doe";
+            customer.EmailAddress = "johndoe@example.com";
+            customer.PhoneNumber = ""; // Empty phone number
+            customer.ShippingAddress = "123 Main St, Springfield";
+            // Set other properties as needed...
+
+            // Act
+            string error = customer.Valid();
+
+            // Assert
+            Assert.AreEqual("Phone number is required.", error, "Validation should fail if phone number is not provided.");
+        }
+
+        [TestMethod]
+        public void ValidMethodMissingShippingAddress()
+        {
+            // Arrange
+            clsCustomer customer = new clsCustomer();
+            customer.FullName = "John Doe";
+            customer.EmailAddress = "johndoe@example.com";
+            customer.PhoneNumber = "123-456-7890";
+            customer.ShippingAddress = ""; // Empty shipping address
+                                           // Set other properties as needed...
+
+            // Act
+            string error = customer.Valid();
+
+            // Assert
+            Assert.AreEqual("Shipping address is required.", error, "Validation should fail if shipping address is not provided.");
+        }
     }
 }

@@ -94,6 +94,22 @@ namespace ClassLibrary
                 return false;
             }
         }
+        // Validation method
+        public string Valid(int supplierId, string supplierName, string contactName, string contactEmail, string contactPhone, string supplierAddress)
+        {
+            // Variable to store the error message
+            string errorMessage = "";
 
+            // Perform validation checks
+            if (string.IsNullOrWhiteSpace(supplierName))
+            {
+                errorMessage += "Supplier name is required.\n";
+            }
+
+            // Add more validation checks as needed...
+
+            // Return the error message
+            return errorMessage;
+        }
     }
 }

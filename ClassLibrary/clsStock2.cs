@@ -99,5 +99,32 @@ namespace ClassLibrary // Adjust to your project's namespace
                 return false;
             }
         }
+        // Validation method
+        public string Valid(int productId, string productName, string category, int quantityInStock, string color, string size, int supplierId)
+        {
+            // Variable to store the error message
+            string errorMessage = "";
+
+            // Perform validation checks
+            if (string.IsNullOrWhiteSpace(productName))
+            {
+                errorMessage += "Product name is required.\n";
+            }
+
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                errorMessage += "Category is required.\n";
+            }
+
+            if (quantityInStock < 0)
+            {
+                errorMessage += "Quantity in stock cannot be negative.\n";
+            }
+
+            // Add more validation checks as needed...
+
+            // Return the error message
+            return errorMessage;
+        }
     }
 }

@@ -283,6 +283,19 @@ namespace Testing6
             // Test to see that the result is correct
             Assert.IsTrue(OK);
         }
+        [TestMethod]
+        public void TestSupplierValidation()
+        {
+            // Arrange
+            clsSupplier supplier = new clsSupplier();
+            string errorMessage;
+
+            // Act
+            errorMessage = supplier.Valid(1, "ABC Clothing", "John Smith", "supplier@example.com", "1234567890", "123 Main St");
+
+            // Assert
+            Assert.AreEqual("", errorMessage, "Validation failed: " + errorMessage);
+        }
     }
 }
 

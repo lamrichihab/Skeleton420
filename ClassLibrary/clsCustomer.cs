@@ -62,7 +62,40 @@ namespace ClassLibrary
             get { return mIsActive; }
             set { mIsActive = value; }
         }
+        // Valid method
+        public string Valid()
+        {
+            // String variable to store any error message
+            string error = "";
 
+            // Check if full name is provided
+            if (string.IsNullOrWhiteSpace(FullName))
+            {
+                error = "Full name is required.";
+            }
+
+            // Check if email address is provided
+            if (string.IsNullOrWhiteSpace(EmailAddress))
+            {
+                error = "Email address is required.";
+            }
+
+            // Check if phone number is provided
+            if (string.IsNullOrWhiteSpace(PhoneNumber))
+            {
+                error = "Phone number is required.";
+            }
+
+            // Check if shipping address is provided
+            if (string.IsNullOrWhiteSpace(ShippingAddress))
+            {
+                error = "Shipping address is required.";
+            }
+
+            // You can add more validation rules as needed...
+
+            return error;
+        }
         // Find method
         public bool Find(int CustomerID)
         {

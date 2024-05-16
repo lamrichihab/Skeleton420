@@ -29,7 +29,7 @@ namespace Testing6
             stock.ProductID = testData;
 
             // Assert
-            Assert.AreEqual(stock.ProductID, testData);
+            Assert.AreEqual(testData, stock.ProductID);
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace Testing6
             stock.ProductName = testData;
 
             // Assert
-            Assert.AreEqual(stock.ProductName, testData);
+            Assert.AreEqual(testData, stock.ProductName);
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace Testing6
             stock.Category = testData;
 
             // Assert
-            Assert.AreEqual(stock.Category, testData);
+            Assert.AreEqual(testData, stock.Category);
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace Testing6
             stock.QuantityInStock = testData;
 
             // Assert
-            Assert.AreEqual(stock.QuantityInStock, testData);
+            Assert.AreEqual(testData, stock.QuantityInStock);
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace Testing6
             stock.Color = testData;
 
             // Assert
-            Assert.AreEqual(stock.Color, testData);
+            Assert.AreEqual(testData, stock.Color);
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace Testing6
             stock.Size = testData;
 
             // Assert
-            Assert.AreEqual(stock.Size, testData);
+            Assert.AreEqual(testData, stock.Size);
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ namespace Testing6
             stock.SupplierID = testData;
 
             // Assert
-            Assert.AreEqual(stock.SupplierID, testData);
+            Assert.AreEqual(testData, stock.SupplierID);
         }
 
         [TestMethod]
@@ -131,5 +131,21 @@ namespace Testing6
             // Test to see if the result is true
             Assert.IsTrue(found);
         }
+
+        // Additional test methods for validation scenarios
+        [TestMethod]
+        public void StockProductIDZero()
+        {
+            // Arrange
+            clsStock2 stock = new clsStock2();
+            int testData = 0;
+
+            // Act
+            stock.ProductID = testData;
+
+            // Assert
+            Assert.AreEqual(testData, stock.ProductID);
+        }
+
     }
 }

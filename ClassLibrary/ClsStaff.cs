@@ -93,5 +93,27 @@ namespace ClassLibrary
                 return false;
             }
         }
+        // Validation method
+        public string Valid(int employeeId, string fullName, string role, string contactPhone, string contactEmail, string department)
+        {
+            // Variable to store the error message
+            string errorMessage = "";
+
+            // Perform validation checks
+            if (string.IsNullOrWhiteSpace(fullName))
+            {
+                errorMessage += "Full name is required.\n";
+            }
+
+            if (string.IsNullOrWhiteSpace(role))
+            {
+                errorMessage += "Role is required.\n";
+            }
+
+            // Add more validation checks as needed...
+
+            // Return the error message
+            return errorMessage;
+        }
     }
 }
