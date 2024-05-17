@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data.OleDb;
+using System.Text.RegularExpressions;
 
 namespace ClassLibrary
 {
@@ -62,40 +62,7 @@ namespace ClassLibrary
             get { return mIsActive; }
             set { mIsActive = value; }
         }
-        // Valid method
-        public string Valid()
-        {
-            // String variable to store any error message
-            string error = "";
 
-            // Check if full name is provided
-            if (string.IsNullOrWhiteSpace(FullName))
-            {
-                error = "Full name is required.";
-            }
-
-            // Check if email address is provided
-            if (string.IsNullOrWhiteSpace(EmailAddress))
-            {
-                error = "Email address is required.";
-            }
-
-            // Check if phone number is provided
-            if (string.IsNullOrWhiteSpace(PhoneNumber))
-            {
-                error = "Phone number is required.";
-            }
-
-            // Check if shipping address is provided
-            if (string.IsNullOrWhiteSpace(ShippingAddress))
-            {
-                error = "Shipping address is required.";
-            }
-
-            // You can add more validation rules as needed...
-
-            return error;
-        }
         // Find method
         public bool Find(int CustomerID)
         {
@@ -128,5 +95,57 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        // Valid method
+        public string Valid(string fullName, string emailAddress, string phoneNumber, string shippingAddress, DateTime accountCreationDate, bool isActive)
+        {
+            // String variable to store any error message
+            string error = "";
+
+            // Check if full name is provided
+            if (string.IsNullOrWhiteSpace(fullName))
+            {
+                error = "Full name is required.";
+            }
+            else if (fullName.Length > 50) // Assuming maximum length is 50 characters
+            {
+                error = "Full name cannot exceed 50 characters.";
+            }
+
+            // Check if email address is provided
+            if (string.IsNullOrWhiteSpace(emailAddress))
+            {
+                error = "Email address is required.";
+            }
+            else if (emailAddress.Length > 245) // Assuming maximum length is 245 characters
+            {
+                error = "Email address cannot exceed 250 characters.";
+            }
+
+            // Check if phone number is provided
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                error = "Phone number is required.";
+            }
+            else if (phoneNumber.Length > 15) // Assuming maximum length is 15 characters
+            {
+                error = "Phone number cannot exceed 15 characters.";
+            }
+
+            // Check if shipping address is provided
+            if (string.IsNullOrWhiteSpace(shippingAddress))
+            {
+                error = "Shipping address is required.";
+            }
+            else if (shippingAddress.Length > 100) // Assuming maximum length is 100 characters
+            {
+                error = "Shipping address cannot exceed 100 characters.";
+            }
+
+            // You can add more validation rules as needed...
+
+            return error;
+        }
+
     }
 }
