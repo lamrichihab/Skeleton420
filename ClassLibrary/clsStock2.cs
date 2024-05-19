@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-// File: clsStock.cs
 namespace ClassLibrary // Adjust to your project's namespace
 {
     public class clsStock2
     {
-        // Private data members for the properties
+        //================================================== Private Data Members ==================================================
         private int mProductID;
         private string mProductName;
         private string mCategory;
@@ -17,6 +15,8 @@ namespace ClassLibrary // Adjust to your project's namespace
         private string mColor;
         private string mSize;
         private int mSupplierID;
+
+        //================================================== Public Properties ==================================================
 
         // ProductID property
         public int ProductID
@@ -67,7 +67,7 @@ namespace ClassLibrary // Adjust to your project's namespace
             set { mSupplierID = value; }
         }
 
-        // Find method
+        //================================================== Find Method ==================================================
         public bool Find(int ProductID)
         {
             // Create an instance of the data connection
@@ -99,32 +99,67 @@ namespace ClassLibrary // Adjust to your project's namespace
                 return false;
             }
         }
-        // Validation method
-        public string Valid(int productId, string productName, string category, int quantityInStock, string color, string size, int supplierId)
+
+        //================================================== Validation Method ==================================================
+        public string Valid(string productName, string category, int quantityInStock, string color, string size, int supplierId)
         {
             // Variable to store the error message
-            string errorMessage = "";
+            string error = "";
 
-            // Perform validation checks
+            //================================================ Product Name Validation ================================================
             if (string.IsNullOrWhiteSpace(productName))
             {
-                errorMessage += "Product name is required.\n";
+                error += "Product name is required. ";
+            }
+            else if (productName.Length > 50) // Assuming maximum length is 50 characters
+            {
+                error += "Product name cannot exceed 50 characters. ";
             }
 
+            //================================================ Category Validation ================================================
             if (string.IsNullOrWhiteSpace(category))
             {
-                errorMessage += "Category is required.\n";
+                error += "Category is required. ";
+            }
+            else if (category.Length > 30) // Assuming maximum length is 30 characters
+            {
+                error += "Category cannot exceed 30 characters. ";
             }
 
+            //================================================ Quantity In Stock Validation ================================================
             if (quantityInStock < 0)
             {
-                errorMessage += "Quantity in stock cannot be negative.\n";
+                error += "Quantity in stock cannot be negative. ";
             }
 
-            // Add more validation checks as needed...
+            //================================================ Color Validation ================================================
+            if (string.IsNullOrWhiteSpace(color))
+            {
+                error += "Color is required. ";
+            }
+            else if (color.Length > 20) // Assuming maximum length is 20 characters
+            {
+                error += "Color cannot exceed 20 characters. ";
+            }
 
-            // Return the error message
-            return errorMessage;
+            //================================================ Size Validation ================================================
+            if (string.IsNullOrWhiteSpace(size))
+            {
+                error += "Size is required. ";
+            }
+            else if (size.Length > 10) // Assuming maximum length is 10 characters
+            {
+                error += "Size cannot exceed 10 characters. ";
+            }
+
+            //================================================ Supplier ID Validation ================================================
+            if (supplierId <= 0)
+            {
+                error += "Supplier ID must be a positive number. ";
+            }
+
+            // Return any error messages, or an empty string if there are no errors
+            return error;
         }
     }
 }
