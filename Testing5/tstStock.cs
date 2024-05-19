@@ -9,143 +9,108 @@ namespace Testing6
         [TestMethod]
         public void StockInstanceOK()
         {
-            // Arrange
+            // Test to check if an instance of clsStock2 can be created
             clsStock2 stock = new clsStock2();
-
-            // Act - Nothing to act upon, just creating an instance
-
-            // Assert
             Assert.IsNotNull(stock);
         }
 
+        //================================================Stock ProductID============================================================
         [TestMethod]
         public void StockProductIDPropertyOK()
         {
-            // Arrange
+            // Test to check if ProductID property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
             int testData = 1;
-
-            // Act
             stock.ProductID = testData;
-
-            // Assert
             Assert.AreEqual(testData, stock.ProductID);
         }
 
+        //================================================Stock ProductName============================================================
         [TestMethod]
         public void StockProductNamePropertyOK()
         {
-            // Arrange
+            // Test to check if ProductName property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
             string testData = "Sample Product";
-
-            // Act
             stock.ProductName = testData;
-
-            // Assert
             Assert.AreEqual(testData, stock.ProductName);
         }
 
+        //================================================Stock Category============================================================
         [TestMethod]
         public void StockCategoryPropertyOK()
         {
-            // Arrange
+            // Test to check if Category property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
             string testData = "Electronics";
-
-            // Act
             stock.Category = testData;
-
-            // Assert
             Assert.AreEqual(testData, stock.Category);
         }
 
+        //================================================Stock QuantityInStock============================================================
         [TestMethod]
         public void StockQuantityInStockPropertyOK()
         {
-            // Arrange
+            // Test to check if QuantityInStock property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
             int testData = 100;
-
-            // Act
             stock.QuantityInStock = testData;
-
-            // Assert
             Assert.AreEqual(testData, stock.QuantityInStock);
         }
 
+        //================================================Stock Color============================================================
         [TestMethod]
         public void StockColorPropertyOK()
         {
-            // Arrange
+            // Test to check if Color property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
             string testData = "Red";
-
-            // Act
             stock.Color = testData;
-
-            // Assert
             Assert.AreEqual(testData, stock.Color);
         }
 
+        //================================================Stock Size============================================================
         [TestMethod]
         public void StockSizePropertyOK()
         {
-            // Arrange
+            // Test to check if Size property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
             string testData = "Medium";
-
-            // Act
             stock.Size = testData;
-
-            // Assert
             Assert.AreEqual(testData, stock.Size);
         }
 
+        //================================================Stock SupplierID============================================================
         [TestMethod]
         public void StockSupplierIDPropertyOK()
         {
-            // Arrange
+            // Test to check if SupplierID property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
             int testData = 5;
-
-            // Act
             stock.SupplierID = testData;
-
-            // Assert
             Assert.AreEqual(testData, stock.SupplierID);
         }
 
+        //================================================Stock Find Method============================================================
         [TestMethod]
         public void StockFindMethodOK()
         {
-            // Arrange
+            // Test to check if the Find method can locate a product by ID
             clsStock2 stock = new clsStock2();
-
-            // Create some test data to use with the method
             int productId = 1;
-
-            // Invoke the method
             bool found = stock.Find(productId);
-
-            // Test to see if the result is true
             Assert.IsTrue(found);
         }
 
-        // Additional test methods for validation scenarios
+        //================================================Stock ProductID Zero============================================================
         [TestMethod]
         public void StockProductIDZero()
         {
-            // Arrange
+            // Test to check if ProductID can be set to zero
             clsStock2 stock = new clsStock2();
             int testData = 0;
-
-            // Act
             stock.ProductID = testData;
-
-            // Assert
             Assert.AreEqual(testData, stock.ProductID);
         }
-
     }
 }
