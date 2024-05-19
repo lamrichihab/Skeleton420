@@ -221,7 +221,7 @@ namespace Testing6
             // Invoke the method
             found = staff.Find(employeeID);
             // Check the ContactPhone property
-            if (staff.ContactPhone != "123-456-7890")
+            if (staff.ContactPhone != "1234567890")
             {
                 ok = false;
             }
