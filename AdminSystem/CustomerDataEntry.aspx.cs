@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using ClassLibrary;
+
 public partial class _1_DataEntry : Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -35,11 +36,21 @@ public partial class _1_DataEntry : Page
             newCustomer.AccountCreationDate = DateTime.Parse(txtAccountCreationDate.Text); // Converting string to DateTime
             newCustomer.IsActive = chkIsActive.Checked;
 
-            // Store in session
-            Session["CustomerData"] = newCustomer;
+            // Validate the data
+            string error = newCustomer.Valid(newCustomer.FullName, newCustomer.EmailAddress, newCustomer.PhoneNumber, newCustomer.ShippingAddress, newCustomer.AccountCreationDate, newCustomer.IsActive);
+            if (string.IsNullOrEmpty(error))
+            {
+                // Store in session
+                Session["CustomerData"] = newCustomer;
 
-            // Navigate to the viewer page
-            Response.Redirect("CustomerViewer.aspx");
+                // Navigate to the viewer page
+                Response.Redirect("CustomerViewer.aspx");
+            }
+            else
+            {
+                // Display the error message
+                ShowError(error);
+            }
         }
         catch (FormatException)
         {
@@ -113,5 +124,4 @@ public partial class _1_DataEntry : Page
             chkIsActive.Checked = ACustomer.IsActive;
         }
     }
-
 }
