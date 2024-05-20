@@ -15,35 +15,35 @@ namespace ClassLibrary
         private bool mShipped;
 
 
-        // CustomerID public property
+        // OrderId public property
         public int OrderId
         {
             get { return mOrderId; }
             set { mOrderId = value; }
         }
 
-        // FullName public property
+        // CustomerId public property
         public int CustomerId
         {
             get { return mCustomerId; }
             set { mCustomerId = value; }
         }
 
-        // EmailAddress public property
+        // EmployeeId public property
         public int EmployeeId
         {
             get { return mEmployeeId; }
             set { mEmployeeId = value; }
         }
 
-        // PhoneNumber public property
+        // OrderDate public property
         public DateTime OrderDate
         {
             get { return mOrderDate; }
             set { mOrderDate = value; }
         }
 
-        // ShippingAddress public property
+        // RequiredDate public property
         public DateTime RequiredDate
         {
             get { return mRequiredDate; }
@@ -52,7 +52,7 @@ namespace ClassLibrary
 
 
 
-        // IsActive public property
+        // Shipped public property
         public bool Shipped
         {
             get { return mShipped; }

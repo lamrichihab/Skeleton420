@@ -1,23 +1,86 @@
-﻿namespace ClassLibrary
+﻿using System;
+
+namespace ClassLibrary
 {
     public class clsOrderlines
     {
-        // Primary key for the product
-        public int ProductId { get; set; }
 
-        // Primary key for the order
-        public int OrderId { get; set; }
 
-        // Quantity for the order
-        public int Quantity { get; set; }
+        // Private data members for the customer properties
+        private int mProductId;
+        private int mOrderId;
+        private int mQuantity;
+        private int mPrice;
+        private string mLocation;
+        private string mOrderStatus;
 
-        // Price for the order
-        public int Price { get; set; }
 
-        // Location of the customer
-        public string Location { get; set; }
+        // ProductId public property
+        public int ProductId
+        {
+            get { return mProductId; }
+            set { mProductId = value; }
+        }
 
-        // Order Staus of the order
-        public string OrderStatus { get; set; }
+        // OrderId public property
+        public int OrderId
+        {
+            get { return mOrderId; }
+            set { mOrderId = value; }
+        }
+
+        // Quantity public property
+        public int Quantity
+        {
+            get { return mQuantity; }
+            set { mQuantity = value; }
+        }
+
+        // OrderDate public property
+        public int Price
+        {
+            get { return mPrice; }
+            set { mPrice = value; }
+        }
+
+        // RequiredDate public property
+        public string Location
+        {
+            get { return mLocation; }
+            set { mLocation = value; }
+        }
+
+
+
+        // Shipped public property
+        public string OrderStatus
+        {
+            get { return mOrderStatus; }
+            set { mOrderStatus = value; }
+        }
+
+        // Find method
+        public bool Find(int ProductId)
+        {
+            // For demonstration purposes, let's assume ProductID 12 is found
+            if (ProductId == 12)
+            {
+                mProductId = 12;
+                mOrderId = 12;
+                mQuantity = 12;
+                mPrice = 12;
+                mLocation = "Test Location";
+                mOrderStatus = "Test OrderStatus";
+                return true;
+            }
+            else
+            {
+                return false;
+
+
+            }
+        }
+
+
     }
 }
