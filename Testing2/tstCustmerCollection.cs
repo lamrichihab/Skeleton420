@@ -91,5 +91,29 @@ namespace TestingCustmerCollection
             // Assert
             Assert.AreEqual(allCustomer.Count, testList.Count);
         }
+        //================================================Add Method OK======================================================
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            // Arrange
+            clsCustomerCollection allCustomers = new clsCustomerCollection();
+            clsCustomer testItem = new clsCustomer();
+            int primaryKey = 0;
+            testItem.CustomerID = 1;
+            testItem.FullName = "John Doe";
+            testItem.EmailAddress = "johndoe@example.com";
+            testItem.PhoneNumber = "123-456-7890";
+            testItem.ShippingAddress = "123 Main St, Springfield";
+            testItem.AccountCreationDate = new DateTime(2022, 1, 1);
+            testItem.IsActive = true;
+
+            // Act
+            allCustomers.ThisCustomer = testItem;
+            primaryKey = testItem.CustomerID;
+            allCustomers.ThisCustomer.Find(primaryKey);
+
+            // Assert
+            Assert.AreEqual(allCustomers.ThisCustomer, testItem);
+        }
     }
 }
