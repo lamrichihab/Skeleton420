@@ -8,120 +8,138 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : Page
 {
+    Int32 CustomerID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        CustomerID = Convert.ToInt32(Session["CustomerID"]);
+        if (IsPostBack == false)
+        {
+            
+        }
     }
+    protected void chkCustomerActive_CheckedChanged(object sender, EventArgs e)
+    {
 
+    }
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        try
+        // Create a new instance of clsCustomer
+        clsCustomer ACustomer = new clsCustomer();
+        // Capture the customer full name
+        string FullName = txtFullName.Text;
+        // Capture the customer Account Creation Date
+        string AccountCreationDateString = txtAccountCreationDate.Text;
+        // Capture the customer address
+        string ShippingAddress = txtShippingAddress.Text;
+        // Capture the customer phone number
+        string PhoneNumber = txtPhoneNumber.Text;
+        // Capture the customer email
+        string emailAddress = txtEmailAddress.Text;
+        // Capture the customer active status
+        bool IsActive = chkIsActive.Checked;
+        // Variable to store any error message
+        string Error = "";
+
+        // Parse the AccountCreationDate
+        DateTime AccountCreationDate;
+        bool DateValid = DateTime.TryParse(AccountCreationDateString, out AccountCreationDate);
+
+        if (!DateValid)
         {
-            clsCustomer newCustomer = new clsCustomer();
+            // Display error if the date is not valid
+            lblError.Text = "The account creation date is not a valid date.";
+            return;
+        }
 
-            // Convert and capture data, handling any necessary type conversions
-            newCustomer.CustomerID = int.Parse(txtCustomerID.Text); // Converting string to integer
-            newCustomer.FullName = txtFullName.Text;
-
-            // Validate email format (very basic check)
-            string emailAddress = txtEmailAddress.Text.Trim(); // Trim to remove leading and trailing whitespaces
-            if (string.IsNullOrEmpty(emailAddress) || !IsValidEmail(emailAddress))
+        // Validate the data
+        Error = ACustomer.Valid(FullName, PhoneNumber, emailAddress, ShippingAddress, AccountCreationDate, IsActive);
+        if (Error == "")
+        {
+            ACustomer.CustomerID = CustomerID;
+            // Capture the customer full name
+            ACustomer.FullName = FullName;
+            // Capture the customer Account Creation Date
+            ACustomer.AccountCreationDate = AccountCreationDate;
+            // Capture the customer phone number
+            ACustomer.PhoneNumber = PhoneNumber;
+            // Capture the customer address
+            ACustomer.ShippingAddress = ShippingAddress;
+            // Capture the customer email
+            ACustomer.EmailAddress = emailAddress;
+            // Capture the customer active status
+            ACustomer.IsActive = IsActive;
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
+            if (CustomerID == -1)
             {
-                ShowError("Invalid email address.");
-                return;
-            }
-
-            newCustomer.EmailAddress = emailAddress;
-            newCustomer.PhoneNumber = txtPhoneNumber.Text;
-            newCustomer.ShippingAddress = txtShippingAddress.Text;
-            newCustomer.AccountCreationDate = DateTime.Parse(txtAccountCreationDate.Text); // Converting string to DateTime
-            newCustomer.IsActive = chkIsActive.Checked;
-
-            // Validate the data
-            string error = newCustomer.Valid(newCustomer.FullName, newCustomer.EmailAddress, newCustomer.PhoneNumber, newCustomer.ShippingAddress, newCustomer.AccountCreationDate, newCustomer.IsActive);
-            if (string.IsNullOrEmpty(error))
-            {
-                // Store in session
-                Session["CustomerData"] = newCustomer;
-
-                // Navigate to the viewer page
-                Response.Redirect("CustomerViewer.aspx");
+                CustomerList.ThisCustomer = ACustomer;
+                CustomerList.Add();
             }
             else
             {
-                // Display the error message
-                ShowError(error);
+                CustomerList.ThisCustomer.Find(CustomerID);
+                CustomerList.ThisCustomer = ACustomer;
+                CustomerList.Update();
             }
+            Response.Redirect("ListOfCustomers.aspx");
         }
-        catch (FormatException)
+        else
         {
-            ShowError("Invalid data format. Please check your input.");
-        }
-        catch (Exception ex)
-        {
-            ShowError("An unexpected error occurred: " + ex.Message);
+            // Display the error message
+            lblError.Text = Error;
         }
     }
-
-    protected void btnCancel_Click(object sender, EventArgs e)
+    protected void btnFind_Click(object sender, EventArgs e)
     {
-        // Clear the form
-        txtCustomerID.Text = "";
-        txtFullName.Text = "";
-        txtEmailAddress.Text = "";
-        txtPhoneNumber.Text = "";
-        txtShippingAddress.Text = "";
-        txtAccountCreationDate.Text = "";
-        chkIsActive.Checked = false;
-    }
-
-    // Validate email address format
-    private bool IsValidEmail(string email)
-    {
-        try
-        {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == email;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    // Define the ShowError method
-    private void ShowError(string message)
-    {
-        lblError.Visible = true;
-        lblError.Text = message;
-    }
-
-    protected void btnFind_Click(Object sender, EventArgs e)
-    {
-        // Create an instance of the customer class
+        //create an instance of the Customer class
         clsCustomer ACustomer = new clsCustomer();
-
-        // Create a variable to store the customer ID
-        Int32 CustomerID;
-
-        // Create a variable to store the result of the find operation
+        //variable to store the primary key
+        Int32 CustomerId;
+        //variable to store the result of the find operation
         Boolean Found = false;
-
-        // Get the customer ID entered by the user
-        CustomerID = Convert.ToInt32(txtCustomerID.Text);
-
-        // Find the record
-        Found = ACustomer.Find(CustomerID);
-
-        // If found
+        //get the primary key entered by the user
+        CustomerId = Convert.ToInt32(txtCustomerID.Text);
+        //find the record
+        Found = ACustomer.Find(CustomerId);
+        //if found
         if (Found == true)
         {
-            // Display values of properties in form
+            //display the value of the properties in the form
+            lblError.Text = "";
             txtFullName.Text = ACustomer.FullName;
-            txtEmailAddress.Text = ACustomer.EmailAddress;
-            txtPhoneNumber.Text = ACustomer.PhoneNumber;
-            txtShippingAddress.Text = ACustomer.ShippingAddress;
             txtAccountCreationDate.Text = ACustomer.AccountCreationDate.ToString("yyyy-MM-dd");
+            txtShippingAddress.Text = ACustomer.ShippingAddress;
+            txtPhoneNumber.Text = ACustomer.PhoneNumber;
+            txtEmailAddress.Text = ACustomer.EmailAddress;
             chkIsActive.Checked = ACustomer.IsActive;
         }
+        else
+        {
+            txtFullName.Text = "";
+            txtAccountCreationDate.Text = "";
+            txtShippingAddress.Text = "";
+            txtAccountCreationDate.Text = "";
+            txtEmailAddress.Text = "";
+            lblError.Text = "Error: This Id doesn't exist!";
+            lblError.Visible = true;
+        }
+    }
+     protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("ListOfCustomers.aspx");
+    }
+    void DisplayCustomer()
+    {
+        clsCustomerCollection ACustomer = new clsCustomerCollection();
+        ACustomer.ThisCustomer.Find(CustomerID);
+        txtCustomerID.Text = ACustomer.ThisCustomer.CustomerID.ToString();
+        txtFullName.Text = ACustomer.ThisCustomer.FullName.ToString();
+        txtShippingAddress.Text = ACustomer.ThisCustomer.ShippingAddress.ToString();
+        txtPhoneNumber.Text = ACustomer.ThisCustomer.PhoneNumber.ToString();
+        txtEmailAddress.Text = ACustomer.ThisCustomer.EmailAddress.ToString();
+        txtAccountCreationDate.Text = ACustomer.ThisCustomer.AccountCreationDate.ToString();
+        chkIsActive.Text = ACustomer.ThisCustomer.IsActive.ToString();
+
+
+
     }
 }
