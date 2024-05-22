@@ -13,10 +13,7 @@ namespace TestingCustmerCollection
         [TestMethod]
         public void CustomerInstanceOK()
         {
-            // Arrange
             clsCustomerCollection allCustomer = new clsCustomerCollection();
-
-            // Act & Assert
             Assert.IsNotNull(allCustomer);
         }
 
@@ -72,7 +69,6 @@ namespace TestingCustmerCollection
         [TestMethod]
         public void ListAndCountOK()
         {
-            //================================================List And Count Property======================================================
             // Arrange
             clsCustomerCollection allCustomer = new clsCustomerCollection();
             List<clsCustomer> testList = new List<clsCustomer>();
@@ -99,7 +95,7 @@ namespace TestingCustmerCollection
             // Arrange
             clsCustomerCollection allCustomers = new clsCustomerCollection();
             clsCustomer testItem = new clsCustomer();
-            int primaryKey = 0;
+            Int32 primaryKey = 0;
             testItem.CustomerID = 1;
             testItem.FullName = "John Doe";
             testItem.EmailAddress = "johndoe@example.com";
@@ -124,6 +120,7 @@ namespace TestingCustmerCollection
             Int32 PrimaryKey = 0;
 
             // Set initial properties
+            TestItem.CustomerID = 1;
             TestItem.FullName = "John Doe";
             TestItem.ShippingAddress = "123 Main St, Springfield";
             TestItem.AccountCreationDate = new DateTime(2024, 02, 05);
@@ -137,8 +134,10 @@ namespace TestingCustmerCollection
             TestItem.CustomerID = PrimaryKey; // Assign the obtained primary key to TestItem
 
             // Update properties
+            TestItem.CustomerID = 2;
             TestItem.FullName = "Jane Smith";
             TestItem.ShippingAddress = "456 Oak St, Riverdale, USA";
+            TestItem.AccountCreationDate = new DateTime(2024, 02, 05);
             TestItem.EmailAddress = "jane.smith@example.com";
             TestItem.PhoneNumber = "987-654-3210";
             TestItem.IsActive = false;
@@ -147,12 +146,9 @@ namespace TestingCustmerCollection
 
             // Retrieve the updated record and check
             AllCustomers.ThisCustomer.Find(PrimaryKey);
-            Assert.AreEqual(AllCustomers.ThisCustomer.FullName, "Jane Smith");
-            Assert.AreEqual(AllCustomers.ThisCustomer.ShippingAddress, "456 Oak St, Riverdale, USA");
-            Assert.AreEqual(AllCustomers.ThisCustomer.EmailAddress, "jane.smith@example.com");
-            Assert.AreEqual(AllCustomers.ThisCustomer.PhoneNumber, "987-654-3210");
-            Assert.AreEqual(AllCustomers.ThisCustomer.IsActive, false);
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
         }
+
 
         [TestMethod]
         public void DeleteMethodOK()
@@ -162,6 +158,7 @@ namespace TestingCustmerCollection
             Int32 PrimaryKey = 0;
 
             // Set initial properties
+            TestItem.CustomerID = 1;
             TestItem.FullName = "John Doe";
             TestItem.ShippingAddress = "123 Main St, Springfield";
             TestItem.AccountCreationDate = new DateTime(2022, 1, 1);
