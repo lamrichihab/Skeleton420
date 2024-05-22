@@ -93,27 +93,57 @@ namespace ClassLibrary
                 return false;
             }
         }
-        // Validation method
-        public string Valid(int employeeId, string fullName, string role, string contactPhone, string contactEmail, string department)
+
+        public string Valid(string fullname, string contactemail, string contactphone, string department, string role)
         {
-            // Variable to store the error message
-            string errorMessage = "";
-
-            // Perform validation checks
-            if (string.IsNullOrWhiteSpace(fullName))
+            String Error = "";
+            //If the fullname is blank
+            if (fullname.Length == 0)
             {
-                errorMessage += "Full name is required.\n";
+                Error = Error + "The Fullname may not be blank : ";
+            }
+            if (fullname.Length > 50)
+            {
+                Error = Error + "The Fullname must be less than 50 characters : ";
+            }
+            //if the email is blank
+            if (contactemail.Length < 10)
+            {
+                Error = Error + "The Contact email may not be blank : ";
+            }
+            if (contactemail.Length > 50)
+            {
+                Error = Error + "The Contact email must be less than 50 characters : ";
+            }
+            //if the phone is blank
+            if (contactphone.Length < 2)
+            {
+                Error = Error + "the phone number is too short";
+            }
+            if (contactphone.Length > 16)
+            {
+                Error = Error + "The phone number is too long";
             }
 
-            if (string.IsNullOrWhiteSpace(role))
+            //if the role is blank
+            if (role.Length == 0)
             {
-                errorMessage += "Role is required.\n";
+                Error = Error + "the role may not be blank";
             }
-
-            // Add more validation checks as needed...
-
-            // Return the error message
-            return errorMessage;
+            if (role.Length > 50)
+            {
+                Error = Error + "The role must be less than 50 characters : ";
+            }
+            //if the department is blank
+            if (department.Length == 0)
+            {
+                Error = Error + "the department may not be blank";
+            }
+            if (department.Length > 50)
+            {
+                Error = Error + "The department must be less than 50 characters : ";
+            }
+            return Error;
         }
     }
 }
