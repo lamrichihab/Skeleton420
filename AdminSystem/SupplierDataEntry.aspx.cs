@@ -14,35 +14,47 @@ public partial class _1_SupplierDataEntry : Page
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        try
-        {
-            // Create a new instance of clsSupplier
-            ClassLibrary.clsSupplier newSupplier = new ClassLibrary.clsSupplier();
+        // Create a new instance of clsSupplier
+        clsSupplier AllSupplier = new clsSupplier();
 
-            // Convert and capture data, handling any necessary type conversions
-            newSupplier.SupplierID = int.Parse(txtSupplierID.Text); // Converting string to integer
-            newSupplier.SupplierName = txtSupplierName.Text;
-            newSupplier.ContactName = txtContactName.Text;
-            newSupplier.ContactPhone = txtContactPhone.Text;
-            newSupplier.ContactEmail = txtContactEmail.Text;
-            newSupplier.SupplierAddress = txtAddress.Text;
-            newSupplier.IsActive = chkIsActive.Checked;
+        // Convert and capture data, handling any necessary type conversions
+        int supplierID;
+        if (!int.TryParse(txtSupplierID.Text, out supplierID))
+        {
+            ShowError("Invalid Supplier ID format. Please enter a valid integer value.");
+            return;
+        }
+        AllSupplier.SupplierID = supplierID;
+
+        string supplierName = txtSupplierName.Text;
+        string suppliercontactName = txtContactName.Text;
+        string suppliercontactPhone = txtContactPhone.Text;
+        string suppliercontactEmail = txtContactEmail.Text;
+        string supplierAddress = txtAddress.Text;
+
+        // Validate the data
+        string Error = AllSupplier.Valid(supplierName, suppliercontactName, suppliercontactEmail, suppliercontactPhone, supplierAddress);
+        if (Error == "")
+        {
+            // Set the data
+            AllSupplier.SupplierName = supplierName;
+            AllSupplier.ContactName = suppliercontactName;
+            AllSupplier.ContactPhone = suppliercontactPhone;
+            AllSupplier.ContactEmail = suppliercontactEmail;
+            AllSupplier.SupplierAddress = supplierAddress;
 
             // Store in session
-            Session["SupplierData"] = newSupplier;
+            Session["SupplierData"] = AllSupplier;
 
             // Navigate to the viewer page
             Response.Redirect("SupplierViewer.aspx");
         }
-        catch (FormatException)
+        else
         {
-            ShowError("Invalid data format. Please check your input.");
+            lblError.Text = Error;
         }
-        catch (Exception ex)
-        {
-            ShowError("An unexpected error occurred: " + ex.Message);
-        }
-    }
+    }    
+
 
     protected void btnCancel_Click(object sender, EventArgs e)
     {
