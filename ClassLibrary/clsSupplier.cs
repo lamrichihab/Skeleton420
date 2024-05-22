@@ -95,21 +95,61 @@ namespace ClassLibrary
             }
         }
         // Validation method
-        public string Valid(int supplierId, string supplierName, string contactName, string contactEmail, string contactPhone, string supplierAddress)
+        public string Valid(string supplierName, string supplierContactName, string supplierContactEmail, string supplierContactPhone, string supplierAddress)
         {
-            // Variable to store the error message
-            string errorMessage = "";
+            string error = "";
 
-            // Perform validation checks
+            // Validate Supplier Name
             if (string.IsNullOrWhiteSpace(supplierName))
             {
-                errorMessage += "Supplier name is required.\n";
+                error += "Supplier Name cannot be blank. ";
+            }
+            if (supplierName.Length > 50)
+            {
+                error += "Supplier Name must be less than 50 characters. ";
             }
 
-            // Add more validation checks as needed...
+            // Validate Supplier Contact Email
+            if (supplierContactEmail.Length < 10)
+            {
+                error += "Supplier Contact Email is too short ";
+            }
+            if (supplierContactEmail.Length > 50)
+            {
+                error += "Supplier Contact Email must be less than 50 characters. ";
+            }
 
-            // Return the error message
-            return errorMessage;
+            // Validate Supplier Contact Phone
+            if (supplierContactPhone.Length < 2)
+            {
+                error += "Supplier Contact Phone is too short. ";
+            }
+            if (supplierContactPhone.Length > 16)
+            {
+                error += "Supplier Contact Phone is too long. ";
+            }
+
+            // Validate Supplier Address
+            if (string.IsNullOrWhiteSpace(supplierAddress))
+            {
+                error += "Supplier Address cannot be blank. ";
+            }
+            if (supplierAddress.Length > 100)
+            {
+                error += "Supplier Address must be less than 100 characters. ";
+            }
+
+            // Validate Supplier Contact Name
+            if (string.IsNullOrWhiteSpace(supplierContactName))
+            {
+                error += "Supplier Contact Name cannot be blank. ";
+            }
+            if (supplierContactName.Length > 50)
+            {
+                error += "Supplier Contact Name must be less than 50 characters. ";
+            }
+
+            return error;
         }
     }
 }
