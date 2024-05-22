@@ -14,33 +14,45 @@ public partial class _1_StaffDataEntry : Page
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        try
-        {
-            clsStaff newStaff = new clsStaff();
+        // Create a new instance of clsStaff
+        clsStaff AllStaff = new clsStaff();
 
-            // Convert and capture data, handling any necessary type conversions
-            newStaff.EmployeeId = int.Parse(txtEmployeeID.Text); // Converting string to integer
-            newStaff.FullName = txtFullName.Text;
-            newStaff.Role = txtRole.Text;
-            newStaff.ContactPhone = txtContactPhone.Text;
-            newStaff.ContactEmail = txtContactEmail.Text;
-            newStaff.Department = txtDepartment.Text;
-            newStaff.IsActive = chkIsActive.Checked;
+        // Convert and capture data, handling any necessary type conversions
+        int employeeId;
+        if (!int.TryParse(txtEmployeeID.Text, out employeeId))
+        {
+            ShowError("Invalid Employee ID format. Please enter a valid integer value.");
+            return;
+        }
+        AllStaff.EmployeeId = employeeId;
+
+        string fullName = txtFullName.Text;
+        string contactPhone = txtContactPhone.Text;
+        string contactEmail = txtContactEmail.Text;
+        string role = txtRole.Text;
+        string department = txtDepartment.Text;
+        string Error = "";
+        // Validate the data
+        Error = AllStaff.Valid(fullName, contactEmail, contactPhone, department, role);
+        if (Error=="")
+        {
+            // Set the data
+            AllStaff.FullName = fullName;
+            AllStaff.ContactPhone = contactPhone;
+            AllStaff.ContactEmail = contactEmail;
+            AllStaff.Role = role;
+            AllStaff.Department = department;
 
             // Store in session
-            Session["StaffData"] = newStaff;
+            Session["AllStaff"] = AllStaff;
 
             // Navigate to the viewer page
             Response.Redirect("StaffViewer.aspx");
         }
-        catch (FormatException)
+        else
         {
-            ShowError("Invalid data format. Please check your input.");
-        }
-        catch (Exception ex)
-        {
-            ShowError("An unexpected error occurred: " + ex.Message);
-        }
+            lblError.Text = Error;
+        }    
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)
