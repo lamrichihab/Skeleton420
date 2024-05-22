@@ -68,9 +68,6 @@ namespace ClassLibrary
                 Index++;
             }
         }
-
-        
-
         public int Add()
         {
             clsDataConnection DB = new clsDataConnection();
@@ -83,6 +80,7 @@ namespace ClassLibrary
             return DB.Execute("sproc_tblCustomer_Insert");
         }
 
+
         public void Update()
         {
             clsDataConnection DB = new clsDataConnection();
@@ -93,14 +91,16 @@ namespace ClassLibrary
             DB.AddParameter("@ShippingAddress", mThisCustomer.ShippingAddress);
             DB.AddParameter("@AccountCreationDate", mThisCustomer.AccountCreationDate);
             DB.AddParameter("@IsActive", mThisCustomer.IsActive);
-            DB.Execute("sproc_tblCustomer_Update");
+            DB.Execute("sproc_tblCustomer_Update"); 
         }
+
         public void Delete()
         {
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@CustomerID", mThisCustomer.CustomerID);
-            DB.Execute("sproc_tblCustomer_Delete");
+            DB.Execute("sproc_tblCustomer_Delete"); 
         }
+
         public void ReportByFullName(string FullName)
         {
             clsDataConnection DB = new clsDataConnection();
