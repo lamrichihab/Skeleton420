@@ -113,10 +113,23 @@ namespace TestingCustomer
         public void FindCustomerIDOK()
         {
             // Test to check if the Find method correctly finds a customer by CustomerID
-            clsCustomer customer = new clsCustomer();
-            bool found = customer.Find(1);
-            Assert.IsTrue(found);
-            Assert.AreEqual(1, customer.CustomerID);
+            //create an istance of the class we want to create
+            clsCustomer ACustomer = new clsCustomer();
+            //Boolean variable to store the results of the validation
+            Boolean Found = false;
+            //boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 CustomerId = 1;
+            //invoke the method
+            Found = ACustomer.Find(CustomerId);
+            //check for the CustomerId
+            if (ACustomer.CustomerID != 1)
+            {
+                OK = false;
+            }
+            //test to see if the result is true
+            Assert.IsTrue(OK);
         }
 
         [TestMethod]
