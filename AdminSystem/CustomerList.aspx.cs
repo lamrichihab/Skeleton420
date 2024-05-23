@@ -22,7 +22,7 @@ public partial class _1_List : System.Web.UI.Page
     {
         clsCustomerCollection Customers = new clsCustomerCollection();
         lstCustomerList.DataSource = Customers.CustomerList;
-        lstCustomerList.DataValueField = "CustomerId";
+        lstCustomerList.DataValueField = "CustomerID";
         lstCustomerList.DataTextField = "FullName";
         lstCustomerList.DataBind();
     }
@@ -30,7 +30,7 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        Session["CustomerId"] = -1;
+        Session["CustomerID"] = -1;
         Response.Redirect("CustomerDataEntry.aspx");
     }
 
@@ -40,7 +40,7 @@ public partial class _1_List : System.Web.UI.Page
         if (lstCustomerList.SelectedIndex != -1)
         {
             CustomerId = Convert.ToInt32(lstCustomerList.SelectedValue);
-            Session["CustomerId"] = CustomerId;
+            Session["CustomerID"] = CustomerId;
             Response.Redirect("CustomerDataEntry.aspx");
         }
         else
@@ -53,14 +53,14 @@ public partial class _1_List : System.Web.UI.Page
     protected void btnDelete_Click(object sender, EventArgs e)
     {
         //var to store the primary key value of the record to be edited
-        Int32 CustomerId;
+        Int32 CustomerID;
         //if a record has been selected from the list
         if (lstCustomerList.SelectedIndex != -1)
         {
             //het the primary key value of the record to edit
-            CustomerId = Convert.ToInt32(lstCustomerList.SelectedValue);
+            CustomerID = Convert.ToInt32(lstCustomerList.SelectedValue);
             //stroe the data in the session object
-            Session["CustomerId"] = CustomerId;
+            Session["CustomerID"] = CustomerID;
             //redirect to delete page
             Response.Redirect("CustomerConfirmDelete.aspx");
         }
@@ -77,7 +77,7 @@ public partial class _1_List : System.Web.UI.Page
         clsCustomerCollection ACustomer = new clsCustomerCollection();
         ACustomer.ReportByFullName(txtFilter.Text);
         lstCustomerList.DataSource = ACustomer.CustomerList;
-        lstCustomerList.DataValueField = "CustomerId";
+        lstCustomerList.DataValueField = "CustomerID";
         lstCustomerList.DataTextField = "FullName";
         lstCustomerList.DataBind();
     }
@@ -89,8 +89,12 @@ public partial class _1_List : System.Web.UI.Page
         txtFilter.Text = "";
         ACustomer.ReportByFullName(txtFilter.Text);
         lstCustomerList.DataSource = ACustomer.CustomerList;
-        lstCustomerList.DataValueField = "CustomerId";
+        lstCustomerList.DataValueField = "CustomerID";
         lstCustomerList.DataTextField = "FullName";
         lstCustomerList.DataBind();
+    }
+    protected void btnReturn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
     }
 }

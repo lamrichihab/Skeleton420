@@ -14,7 +14,11 @@ public partial class _1_DataEntry : Page
         CustomerID = Convert.ToInt32(Session["CustomerID"]);
         if (IsPostBack == false)
         {
-            
+            if (CustomerID != -1)
+            {
+                DisplayCustomer();
+            }
+
         }
     }
     protected void chkCustomerActive_CheckedChanged(object sender, EventArgs e)
@@ -37,9 +41,6 @@ public partial class _1_DataEntry : Page
         string emailAddress = txtEmailAddress.Text;
         // Capture the customer active status
         bool IsActive = chkIsActive.Checked;
-        // Variable to store any error message
-        string Error = "";
-
         // Parse the AccountCreationDate
         DateTime AccountCreationDate;
         bool DateValid = DateTime.TryParse(AccountCreationDateString, out AccountCreationDate);
@@ -50,7 +51,8 @@ public partial class _1_DataEntry : Page
             lblError.Text = "The account creation date is not a valid date.";
             return;
         }
-
+        // Variable to store any error message
+        string Error = "";
         // Validate the data
         Error = ACustomer.Valid(FullName, PhoneNumber, emailAddress, ShippingAddress, AccountCreationDate, IsActive);
         if (Error == "")
@@ -59,7 +61,7 @@ public partial class _1_DataEntry : Page
             // Capture the customer full name
             ACustomer.FullName = FullName;
             // Capture the customer Account Creation Date
-            ACustomer.AccountCreationDate = AccountCreationDate;
+            ACustomer.AccountCreationDate = Convert.ToDateTime (AccountCreationDate);
             // Capture the customer phone number
             ACustomer.PhoneNumber = PhoneNumber;
             // Capture the customer address
@@ -80,7 +82,9 @@ public partial class _1_DataEntry : Page
                 CustomerList.ThisCustomer = ACustomer;
                 CustomerList.Update();
             }
-            Response.Redirect("ListOfCustomers.aspx");
+            CustomerList.ThisCustomer = ACustomer;
+            CustomerList.Add();
+            Response.Redirect("CustomersList.aspx");
         }
         else
         {
@@ -125,7 +129,7 @@ public partial class _1_DataEntry : Page
     }
      protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("ListOfCustomers.aspx");
+        Response.Redirect("CustomersList.aspx");
     }
     void DisplayCustomer()
     {
@@ -138,8 +142,10 @@ public partial class _1_DataEntry : Page
         txtEmailAddress.Text = ACustomer.ThisCustomer.EmailAddress.ToString();
         txtAccountCreationDate.Text = ACustomer.ThisCustomer.AccountCreationDate.ToString();
         chkIsActive.Text = ACustomer.ThisCustomer.IsActive.ToString();
-
-
+    }
+    protected void btnReturn_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
 
     }
 }
