@@ -84,7 +84,7 @@ public partial class _1_DataEntry : Page
             }
             CustomerList.ThisCustomer = ACustomer;
             CustomerList.Add();
-            Response.Redirect("CustomersList.aspx");
+            Response.Redirect("CustomerList.aspx");
         }
         else
         {
@@ -97,13 +97,13 @@ public partial class _1_DataEntry : Page
         //create an instance of the Customer class
         clsCustomer ACustomer = new clsCustomer();
         //variable to store the primary key
-        Int32 CustomerId;
+        Int32 CustomerID;
         //variable to store the result of the find operation
         Boolean Found = false;
         //get the primary key entered by the user
-        CustomerId = Convert.ToInt32(txtCustomerID.Text);
+        CustomerID = Convert.ToInt32(txtCustomerID.Text);
         //find the record
-        Found = ACustomer.Find(CustomerId);
+        Found = ACustomer.Find(CustomerID);
         //if found
         if (Found == true)
         {
@@ -129,19 +129,29 @@ public partial class _1_DataEntry : Page
     }
      protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("CustomersList.aspx");
+        Response.Redirect("CustomerList.aspx");
     }
     void DisplayCustomer()
     {
-        clsCustomerCollection ACustomer = new clsCustomerCollection();
-        ACustomer.ThisCustomer.Find(CustomerID);
-        txtCustomerID.Text = ACustomer.ThisCustomer.CustomerID.ToString();
-        txtFullName.Text = ACustomer.ThisCustomer.FullName.ToString();
-        txtShippingAddress.Text = ACustomer.ThisCustomer.ShippingAddress.ToString();
-        txtPhoneNumber.Text = ACustomer.ThisCustomer.PhoneNumber.ToString();
-        txtEmailAddress.Text = ACustomer.ThisCustomer.EmailAddress.ToString();
-        txtAccountCreationDate.Text = ACustomer.ThisCustomer.AccountCreationDate.ToString();
-        chkIsActive.Text = ACustomer.ThisCustomer.IsActive.ToString();
+        clsCustomerCollection CustomerList = new clsCustomerCollection();
+        bool found = CustomerList.ThisCustomer.Find(CustomerID);
+
+        if (found)
+        {
+            txtCustomerID.Text = CustomerList.ThisCustomer.CustomerID.ToString();
+            txtFullName.Text = CustomerList.ThisCustomer.FullName.ToString();
+            txtShippingAddress.Text = CustomerList.ThisCustomer.ShippingAddress.ToString();
+            txtPhoneNumber.Text = CustomerList.ThisCustomer.PhoneNumber.ToString();
+            txtEmailAddress.Text = CustomerList.ThisCustomer.EmailAddress.ToString();
+            txtAccountCreationDate.Text = CustomerList.ThisCustomer.AccountCreationDate.ToString("yyyy-MM-dd");
+            chkIsActive.Checked = CustomerList.ThisCustomer.IsActive;
+        }
+        else
+        {
+            // Handle the case where the customer is not found
+            lblError.Text = "Customer not found.";
+            lblError.Visible = true;
+        }
     }
     protected void btnReturn_Click(object sender, EventArgs e)
     {
