@@ -19,12 +19,12 @@ public partial class _1_ConfirmDelete : System.Web.UI.Page
         clsCustomerCollection ACustomer = new clsCustomerCollection();
         ACustomer.ThisCustomer.Find(CustomerID);
         ACustomer.Delete();
-        Response.Redirect("CustomersList.aspx");
+        Response.Redirect("CustomerList.aspx");
     }
 
     protected void btnNo_Click(object sender, EventArgs e)
     {
-        Response.Redirect("CustomersList.aspx");
+        Response.Redirect("CustomerList.aspx");
 
     }
 }

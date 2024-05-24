@@ -127,9 +127,9 @@ namespace ClassLibrary
             {
                 error = "Phone number is required.";
             }
-            else if (phoneNumber.Length > 15) // Assuming maximum length is 15 characters
+            else if (phoneNumber.Length > 40) // Assuming maximum length is 15 characters
             {
-                error = "Phone number cannot exceed 15 characters.";
+                error = "Phone number cannot exceed 40 characters.";
             }
 
             // Check if shipping address is provided
