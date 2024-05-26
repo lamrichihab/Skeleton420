@@ -4,28 +4,22 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ClassLibrary;
 
-public partial class _1Viewer : Page
+public partial class _1Viewer : System.Web.UI.Page
 {
-    // This function retrieves stock data from the session
-    public string GetStockInfo()
+    protected void Page_Load(object sender, EventArgs e)
     {
-        // Retrieve stock data from the session
-        clsStock2 stock = Session["StockData"] as clsStock2;
+        //create a new instance of class
+        clsStock2 StockItem = new clsStock2();
 
-        if (stock == null)
-        {
-            return "No stock data found."; // Return a message if no data is found
-        }
+        //get the data from the session object
+        StockItem = (clsStock2)Session["StockItem"];
 
-        // Create a formatted string with stock information
-        string stockInfo = "Product ID: " + stock.ProductID + "<br>" +
-                           "Product Name: " + stock.ProductName + "<br>" +
-                           "Category: " + stock.Category + "<br>" +
-                           "Quantity in Stock: " + stock.QuantityInStock + "<br>" +
-                           "Color: " + stock.Color + "<br>" +
-                           "Size: " + stock.Size + "<br>" +
-                           "Supplier ID: " + stock.SupplierID + "<br>";
-
-        return stockInfo; // Return the formatted string
+        //display the data from this entry
+        Response.Write(StockItem.ProductName + " ");
+        Response.Write(StockItem.ArrivedOn + " ");
+        Response.Write(StockItem.QuantityInStock + " ");
+        Response.Write(StockItem.Available + " ");
+        Response.Write(StockItem.Size + " ");
+        Response.Write(StockItem.SupplierID + " ");
     }
 }

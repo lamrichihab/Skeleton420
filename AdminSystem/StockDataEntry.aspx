@@ -22,15 +22,11 @@
         </p>
         <p>
             <asp:Label ID="lblCategory" runat="server" Text="Category" style="display: inline-block; width: 120px;" />
-            <asp:TextBox ID="txtCategory" runat="server" style="width: 150px;" />
+            <asp:TextBox ID="txtArrivedOn" runat="server" style="width: 150px;" />
         </p>
         <p>
             <asp:Label ID="lblQuantityInStock" runat="server" Text="Quantity in Stock" style="display: inline-block; width: 120px;" />
             <asp:TextBox ID="txtQuantityInStock" runat="server" style="width: 150px;" TextMode="Number" />
-        </p>
-        <p>
-            <asp:Label ID="lblColor" runat="server" Text="Color" style="display: inline-block; width: 120px;" />
-            <asp:TextBox ID="txtColor" runat="server" style="width: 150px;" />
         </p>
         <p>
             <asp:Label ID="lblSize" runat="server" Text="Size" style="display: inline-block; width: 120px;" />
@@ -40,6 +36,10 @@
             <asp:Label ID="lblSupplierID" runat="server" Text="Supplier ID" style="display: inline-block; width: 120px;" />
             <asp:TextBox ID="txtSupplierID" runat="server" style="width: 150px;" TextMode="Number" />
         </p>
+        <p>
+            <asp:Label ID="lblAvailable" runat="server" Text="Available" style="display: inline-block; width: 120px;" />
+            <asp:CheckBox ID="chkAvailable" runat="server" />
+        </p>
         <!-- Error message label -->
         <p>
             <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red" Visible="False" />
@@ -48,6 +48,8 @@
         <p>
             <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" />
             <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+            <asp:Button ID="btnReturn" runat="server" Text="Return" Width="77px" OnClick="btnReturn_Click" />
+
         </p>
     </form>
 </body>

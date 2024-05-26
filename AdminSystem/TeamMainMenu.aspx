@@ -10,6 +10,14 @@
     <form id="form1" runat="server">
         <div>
         </div>
+         <asp:Label ID="lblWarning" runat="server" Text="420 Main Menu"></asp:Label>
+        <br />
+    <br />
+
+    <asp:Button ID="btnCustomerData" runat="server" Height="35px" OnClick="btnCustomer_Click" Text="Customer" Width="80px" />
+&nbsp;
+      
+ <br />
     </form>
 </body>
 </html>
