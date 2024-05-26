@@ -50,6 +50,8 @@
     <Compile Include="clsDataConnection.cs" />
     <Compile Include="clsOrderlines.cs" />
     <Compile Include="clsStaff.cs" />
+    <Compile Include="clsStockCollection.cs" />
+    <Compile Include="clsStockUser.cs" />
     <Compile Include="clsSupplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

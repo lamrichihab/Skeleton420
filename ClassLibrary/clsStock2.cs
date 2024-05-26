@@ -10,9 +10,9 @@ namespace ClassLibrary // Adjust to your project's namespace
         //================================================== Private Data Members ==================================================
         private int mProductID;
         private string mProductName;
-        private string mCategory;
+        private DateTime mArrivedOn;
         private int mQuantityInStock;
-        private string mColor;
+        private Boolean mAvailable;
         private string mSize;
         private int mSupplierID;
 
@@ -33,10 +33,10 @@ namespace ClassLibrary // Adjust to your project's namespace
         }
 
         // Category property
-        public string Category
+        public DateTime ArrivedOn
         {
-            get { return mCategory; }
-            set { mCategory = value; }
+            get { return mArrivedOn; }
+            set { ArrivedOn = value; }
         }
 
         // QuantityInStock property
@@ -46,11 +46,11 @@ namespace ClassLibrary // Adjust to your project's namespace
             set { mQuantityInStock = value; }
         }
 
-        // Color property
-        public string Color
+        // Available property
+        public Boolean Available
         {
-            get { return mColor; }
-            set { mColor = value; }
+            get { return mAvailable; }
+            set { mAvailable = value; }
         }
 
         // Size property
@@ -83,9 +83,9 @@ namespace ClassLibrary // Adjust to your project's namespace
                 // Copy the data from the database to the private data members
                 mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
                 mProductName = Convert.ToString(DB.DataTable.Rows[0]["ProductName"]);
-                mCategory = Convert.ToString(DB.DataTable.Rows[0]["Category"]);
+                mArrivedOn = Convert.ToDateTime(DB.DataTable.Rows[0]["ArrivedOn"]);
                 mQuantityInStock = Convert.ToInt32(DB.DataTable.Rows[0]["QuantityInStock"]);
-                mColor = Convert.ToString(DB.DataTable.Rows[0]["Color"]);
+                mAvailable = Convert.ToBoolean(DB.DataTable.Rows[0]["Available"]);
                 mSize = Convert.ToString(DB.DataTable.Rows[0]["Size"]);
                 mSupplierID = Convert.ToInt32(DB.DataTable.Rows[0]["SupplierID"]);
 
@@ -101,7 +101,7 @@ namespace ClassLibrary // Adjust to your project's namespace
         }
 
         //================================================== Validation Method ==================================================
-        public string Valid(string productName, string category, int quantityInStock, string color, string size, int supplierId)
+        public string Valid(string productName, string arrivedOn, string quantityInStock, string size, string supplierId)
         {
             // Variable to store the error message
             string error = "";
@@ -109,39 +109,70 @@ namespace ClassLibrary // Adjust to your project's namespace
             //================================================ Product Name Validation ================================================
             if (string.IsNullOrWhiteSpace(productName))
             {
-                error += "Product name is required. ";
+                error += "Product name is required.";
             }
             else if (productName.Length > 50) // Assuming maximum length is 50 characters
             {
-                error += "Product name cannot exceed 50 characters. ";
+                error += "Product name cannot exceed 50 characters.";
             }
 
-            //================================================ Category Validation ================================================
-            if (string.IsNullOrWhiteSpace(category))
+            //================================================ arrivedOn Validation ================================================
+            //create a temporary variable to store the date values
+            DateTime DateTemp;
+            //create an instance of DateTime (DateComp) to compare with DateTemp in the if statements
+            DateTime DateNow = DateTime.Now.Date;
+            try
             {
-                error += "Category is required. ";
+                //copy the arrivedOn value to the DateTemp variable
+                DateTemp = Convert.ToDateTime(arrivedOn);
+
+                if (DateTemp < DateNow)//compare the dates
+                {
+                    //record the error
+                    error = error + "The date cannot be in the past";
+                }
+
+                if (DateTemp > DateNow)
+                {
+                    //record the error
+                    error = error + "The date cannot be in the future";
+                }
             }
-            else if (category.Length > 30) // Assuming maximum length is 30 characters
+            catch
             {
-                error += "Category cannot exceed 30 characters. ";
+                error = error + "The date was not a valid date";
             }
 
             //================================================ Quantity In Stock Validation ================================================
-            if (quantityInStock < 0)
+            //create temporary variable to store the int values
+            int QuantityTemp;
+            if (QuantityInStock == 0 )
             {
-                error += "Quantity in stock cannot be negative. ";
+                error = error + "Quantity cannot be left blank";
             }
+            else
+            {
+                try
+                {
+                    QuantityTemp = Convert.ToInt32(QuantityInStock);
 
-            //================================================ Color Validation ================================================
-            if (string.IsNullOrWhiteSpace(color))
-            {
-                error += "Color is required. ";
-            }
-            else if (color.Length > 20) // Assuming maximum length is 20 characters
-            {
-                error += "Color cannot exceed 20 characters. ";
-            }
+                    if (QuantityTemp < 0)
+                    {
+                        error = error + "The quantity cannot be less than 0";
+                    }
 
+                    if (QuantityTemp > 200)
+                    {
+                        error = error + "The quantity cannot be greater than 200";
+                    }
+
+
+                }
+                catch
+                {
+                    error = error + "The quantity was not valid";
+                }
+            }
             //================================================ Size Validation ================================================
             if (string.IsNullOrWhiteSpace(size))
             {
@@ -153,9 +184,9 @@ namespace ClassLibrary // Adjust to your project's namespace
             }
 
             //================================================ Supplier ID Validation ================================================
-            if (supplierId <= 0)
+            if (string.IsNullOrWhiteSpace(supplierId))
             {
-                error += "Supplier ID must be a positive number. ";
+                error += "Supplier ID  is required. ";
             }
 
             // Return any error messages, or an empty string if there are no errors

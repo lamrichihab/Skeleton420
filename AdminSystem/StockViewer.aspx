@@ -8,8 +8,6 @@
 <body>
     <div>
         <h1>Stock Information</h1>
-        <!-- Call the function from the code-behind to get stock info -->
-        <%= GetStockInfo() %>
     </div>
 </body>
 </html>

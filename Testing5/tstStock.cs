@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ClassLibrary;
+using System;
+using System.Diagnostics;
 
 namespace Testing6
 {
@@ -36,20 +38,23 @@ namespace Testing6
             Assert.AreEqual(testData, stock.ProductName);
         }
 
-        //================================================Stock Category============================================================
+        //================================================Available ============================================================
         [TestMethod]
-        public void StockCategoryPropertyOK()
+        public void AvailablePropertyOK()
         {
-            // Test to check if Category property can be set and retrieved correctly
-            clsStock2 stock = new clsStock2();
-            string testData = "Electronics";
-            stock.Category = testData;
-            Assert.AreEqual(testData, stock.Category);
+            //create an instance of the class
+            clsStock2 StockItem = new clsStock2();
+            //create test data to assign to property
+            Boolean TestData = true;
+            //assign the data to the property
+            StockItem.Available = TestData;
+            //test to see that the two values are the same
+            Assert.AreEqual(StockItem.Available, TestData);
         }
 
-        //================================================Stock QuantityInStock============================================================
+        //================================================Quantity In Stock============================================================
         [TestMethod]
-        public void StockQuantityInStockPropertyOK()
+        public void QuantityInStockPropertyOK()
         {
             // Test to check if QuantityInStock property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
@@ -58,20 +63,23 @@ namespace Testing6
             Assert.AreEqual(testData, stock.QuantityInStock);
         }
 
-        //================================================Stock Color============================================================
+        //================================================Arrived On============================================================
         [TestMethod]
-        public void StockColorPropertyOK()
+        public void ArrivedOnPropertyOK()
         {
-            // Test to check if Color property can be set and retrieved correctly
-            clsStock2 stock = new clsStock2();
-            string testData = "Red";
-            stock.Color = testData;
-            Assert.AreEqual(testData, stock.Color);
+            //create an instance of the class
+            clsStock2 StockItem = new clsStock2();
+            //create test data to assign to property
+            DateTime TestData = DateTime.Now.Date;
+            //assign the data to the property
+            StockItem.ArrivedOn = TestData;
+            //test to see that the two values are the same
+            Assert.AreEqual(StockItem.ArrivedOn, TestData);
         }
 
-        //================================================Stock Size============================================================
+        //================================================ Size============================================================
         [TestMethod]
-        public void StockSizePropertyOK()
+        public void SizePropertyOK()
         {
             // Test to check if Size property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
@@ -80,9 +88,9 @@ namespace Testing6
             Assert.AreEqual(testData, stock.Size);
         }
 
-        //================================================Stock SupplierID============================================================
+        //================================================ SupplierID============================================================
         [TestMethod]
-        public void StockSupplierIDPropertyOK()
+        public void SupplierIDPropertyOK()
         {
             // Test to check if SupplierID property can be set and retrieved correctly
             clsStock2 stock = new clsStock2();
@@ -91,16 +99,7 @@ namespace Testing6
             Assert.AreEqual(testData, stock.SupplierID);
         }
 
-        //================================================Stock Find Method============================================================
-        [TestMethod]
-        public void StockFindMethodOK()
-        {
-            // Test to check if the Find method can locate a product by ID
-            clsStock2 stock = new clsStock2();
-            int productId = 1;
-            bool found = stock.Find(productId);
-            Assert.IsTrue(found);
-        }
+        
 
         //================================================Stock ProductID Zero============================================================
         [TestMethod]
@@ -112,5 +111,581 @@ namespace Testing6
             stock.ProductID = testData;
             Assert.AreEqual(testData, stock.ProductID);
         }
+        //================================================ Find Method============================================================
+        [TestMethod]
+        public void productIDFindMethodOK()
+        {
+            // Test to check if the Find method can locate a product by ID
+            clsStock2 stock = new clsStock2();
+            int productID = 1;
+            bool found = stock.Find(productID);
+            Assert.IsTrue(found);
+        }
+        [TestMethod]
+        public void TestStockIdFound()
+        {
+            //create an instance of the class
+            clsStock2 StockItem = new clsStock2();
+            //create a boolean variable to store the result of the search
+            Boolean Found = false;
+            //create a boolean variable to record if the data is ok (assume it is)
+            Boolean OK = true;
+            //create test data
+            Int32 ProductID = 4;
+            //invoke the method
+            Found = StockItem.Find(ProductID);
+            //check the stockId
+            if (StockItem.ProductID != 4)
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestArrivedOnFound()
+        {
+            //create an instance of the class
+            clsStock2 StockItem = new clsStock2();
+            //create a boolean variable to store the result of the search
+            Boolean Found = false;
+            //create a boolean variable to record if the data is ok (assume it is)
+            Boolean OK = true;
+            //create test data
+            Int32 ProductID = 4;
+            //invoke the method
+            Found = StockItem.Find(ProductID);
+            //check the arrived on property
+            if (StockItem.ArrivedOn != Convert.ToDateTime("12/05/2024"))
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestProductNameFound()
+        {
+            //create an instance of the class
+            clsStock2 StockItem = new clsStock2();
+            //create a boolean variable to store the result of the search
+            Boolean Found = false;
+            //create a boolean variable to record if the data is ok (assume it is)
+            Boolean OK = true;
+            //create test data
+            Int32 ProductID = 4;
+            //invoke the method
+            Found = StockItem.Find(ProductID);
+            //check the item name property
+            if (StockItem.ProductName != "ASUS Radeon RX 7900 XTX 24GB")
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestQuantityFound()
+        {
+            //create an instance of the class
+            clsStock2 StockItem = new clsStock2();
+            //create a boolean variable to store the result of the search
+            Boolean Found = false;
+            //create a boolean variable to record if the data is ok (assume it is)
+            Boolean OK = true;
+            //create test data
+            Int32 ProductID = 4;
+            //invoke the method
+            Found = StockItem.Find(ProductID);
+            //check the quantity property
+            if (StockItem.QuantityInStock != 10)
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPriceFound()
+        {
+            //create an instance of the class
+            clsStock2 StockItem = new clsStock2();
+            //create a boolean variable to store the result of the search
+            Boolean Found = false;
+            //create a boolean variable to record if the data is ok (assume it is)
+            Boolean OK = true;
+            //create test data
+            Int32 ProductID = 4;
+            //invoke the method
+            Found = StockItem.Find(ProductID);
+            //check the price property
+            if (StockItem.Size != "Medium")
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestAvailableFound()
+        {
+            //create an instance of the class
+            clsStock2 StockItem = new clsStock2();
+            //create a boolean variable to store the result of the search
+            Boolean Found = false;
+            //create a boolean variable to record if the data is ok (assume it is)
+            Boolean OK = true;
+            //create test data
+            Int32 ProductID = 4;
+            //invoke the method
+            Found = StockItem.Find(ProductID);
+            //check the available property
+            if (StockItem.Available != true)
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestSupplierIDFound()
+        {
+            //create an instance of the class
+            clsStock2 StockItem = new clsStock2();
+            //create a boolean variable to store the result of the search
+            Boolean Found = false;
+            //create a boolean variable to record if the data is ok (assume it is)
+            Boolean OK = true;
+            //create test data
+            Int32 ProductID = 4;
+            //invoke the method
+            Found = StockItem.Find(ProductID);
+            //check the supplier id property
+            if (StockItem.SupplierID != 3)
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+        //================================================ Validation Method ============================================================
+
+        //good test data
+        string ProductName = "Gigabyte GeForce RTX 4090 WindForce 24GB";
+        string ArrivedOn = DateTime.Now.ToShortDateString();
+        string QuantityInStock = "19";
+        string Size = "1699.99";
+        string SupplierID ="1";
+
+        [TestMethod]
+        public void ProductNameMinLessOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store any error message
+            String Error = "";
+            //create test data (override the good data) to pass to the method
+            string ProductName = ""; //this should throw error
+             //invoke method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, ""); //if there is an error the strings wont match
+        }
+
+        [TestMethod]
+        public void ProductNameMin()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store any error message
+            String Error = "";
+            //create test data (override the good data) to pass to the method
+            string ProductName = "a"; //this should pass
+             //invoke method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ProductNameMinPlusOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store any error message
+            String Error = "";
+            //create test data (override the good data) to pass to the method
+            string ProductName = "aa"; //this should be ok
+             //invoke method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ProductNameMaxLessOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store any error message
+            String Error = "";
+            //create test data (override the good data) to pass to the method
+            string ProductName = "";
+            ProductName = ProductName.PadRight(69, 'a'); //this should pass
+             //invoke method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ProductNameMax()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store any error message
+            String Error = "";
+            //create test data (override the good data) to pass to the method
+            string ProductName = "";
+            ProductName = ProductName.PadRight(70, 'a'); //this should pass
+            //invoke method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ProductNameMid()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store any error message
+            String Error = "";
+            //create test data (override the good data) to pass to the method
+            string ProductName = "";
+            ProductName = ProductName.PadRight(35, 'a'); //this should pass
+             //invoke method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ProductNameMaxPlusOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store any error message
+            String Error = "";
+            //create test data (override the good data) to pass to the method
+            string ProductName = "";
+            ProductName = ProductName.PadRight(71, 'a'); //this should fail
+             //invoke method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ProductNameExtremeMax()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store any error message
+            String Error = "";
+            //create test data (override the good data) to pass to the method
+            string ProductName = "";
+            ProductName = ProductName.PadRight(500, 'a'); //this should fail
+            //invoke method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ArrivedOnExtremeMin()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create a variable to store the test data
+            DateTime TestDate;
+            //set the date to today's date
+            TestDate = DateTime.Now.Date;
+            //today's date minus 100 years
+            TestDate = TestDate.AddYears(-100);
+            //convert the date variable to a string type
+            string ArrivedOn = TestDate.ToString();
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ArrivedOnMinLessOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create a variable to store the test data
+            DateTime TestDate;
+            //set the date to today's date
+            TestDate = DateTime.Now.Date;
+            //today's date minus 1 day
+            TestDate = TestDate.AddDays(-1); //should cause error
+                                             //convert the date variable to a string type
+            string ArrivedOn = TestDate.ToString();
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ArrivedOnMin()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create a variable to store the test data
+            DateTime TestDate;
+            //set the date to today's date
+            TestDate = DateTime.Now.Date;
+            //convert the date variable to a string type
+            string ArrivedOn = TestDate.ToString();
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ArrivedOnMinPlusOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create a variable to store the test data
+            DateTime TestDate;
+            //set the date to today's date
+            TestDate = DateTime.Now.Date;
+            //today's date add 1 day
+            TestDate = TestDate.AddDays(1); //should cause error
+                                            //convert the date variable to a string type
+            string ArrivedOn = TestDate.ToString();
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ArrivedOnMax()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create a variable to store the test data
+            DateTime TestDate;
+            //set the date to today's date
+            TestDate = DateTime.Now.Date;
+            //convert the date variable to a string type
+            string ArrivedOn = TestDate.ToString();
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ArrivedOnMaxPlusOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create a variable to store the test data
+            DateTime TestDate;
+            //set the date to today's date
+            TestDate = DateTime.Now.Date;
+            //today's date plus 1 day
+            TestDate = TestDate.AddDays(1); //should cause error
+                                            //convert the date variable to a string type
+            string ArrivedOn = TestDate.ToString();
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void ArrivedOnExtremeMax()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create a variable to store the test data
+            DateTime TestDate;
+            //set the date to today's date
+            TestDate = DateTime.Now.Date;
+            //today's date plus 100 years
+            TestDate = TestDate.AddYears(100); //should cause error
+            //convert the date variable to a string type
+            string ArrivedOn = TestDate.ToString();
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void QuantityInStockMinLessOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            string QuantityInStock = "-1"; //this should cause an error
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void QuantityInStockMin()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            string QuantityInStock = "0"; //this should pass
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void QuantityInStockMinPlusOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            string QuantityInStock = "-1"; //this should pass
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void QuantityInStockMaxLessOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            string QuantityInStock = "999"; //this should pass
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void QuantityInStockMax()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            string QuantityInStock = "1000"; //this should pass
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void QuantityInStockMaxPlusOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            string QuantityInStock = "1001"; //this should fail
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void QuantityInStockExtremeMax()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            string QuantityInStock = "10000"; //this should fail
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void SizeInvalidData()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            string Size = "this is not a valid size"; //this should fail
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void SupplierIDInvalidData()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            string SupplierID = "0"; //this should fail
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+
     }
 }
