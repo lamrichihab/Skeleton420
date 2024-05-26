@@ -6,8 +6,7 @@ namespace ClassLibrary
 {
     public class clsStaffCollection
     {
-        // private data member for the list
-        List<clsStaff> mStaffList = new List<clsStaff>();
+
         public clsStaffCollection()
         {
             //variable for the index
@@ -37,17 +36,49 @@ namespace ClassLibrary
                 Index++;
             }
         }
-
+        // private data member for the list
+        List<clsStaff> mStaffList = new List<clsStaff>();
+        // private member data for ThisStaff
+        clsStaff mThisStaff = new clsStaff();
         public List<clsStaff> StaffList
         {
             get { return mStaffList; }
             set { mStaffList = value; }
         }
-        public clsStaff ThisStaff { get; set; }
+        // Public property to hold a single staff object
+        public clsStaff ThisStaff
+        {
+            get
+            {
+                // return the private data
+                return mThisStaff;
+            }
+            set
+            {
+                // set the private data
+                mThisStaff = value;
+            }
+        }
         public int Count
         {
             get { return mStaffList.Count; }
             set { /* We can ignore  */ }
+        }
+
+        public int Add()
+        {
+            // adds a record to the database based on the values of mThisStaff
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // set the parameters for the stored procedure
+            DB.AddParameter("@FullName", mThisStaff.FullName);
+            DB.AddParameter("@Role", mThisStaff.Role);
+            DB.AddParameter("@ContactEmail", mThisStaff.ContactEmail);
+            DB.AddParameter("@ContactPhone", mThisStaff.ContactPhone);
+            DB.AddParameter("@Department", mThisStaff.Department);
+            DB.AddParameter("@IsActive", mThisStaff.IsActive);
+            // execute the query returning the primary key value
+            return DB.Execute("sproc_tblStaff_Insert");
         }
     }
 }

@@ -42,10 +42,14 @@ public partial class _1_StaffDataEntry : Page
             AllStaff.ContactEmail = contactEmail;
             AllStaff.Role = role;
             AllStaff.Department = department;
-
-            // Store in session
-            Session["AllStaff"] = AllStaff;
-
+            // create a new instance of the staff collection
+            clsStaffCollection StaffList = new clsStaffCollection();
+            // set the ThisStaff property
+            StaffList.ThisStaff = AllStaff;
+            // add the new record
+            StaffList.Add();
+            // redirect back to the list page
+            Response.Redirect("StaffList.aspx");
             // Navigate to the viewer page
             Response.Redirect("StaffViewer.aspx");
         }
