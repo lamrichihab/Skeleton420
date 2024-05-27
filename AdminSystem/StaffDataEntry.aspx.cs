@@ -8,8 +8,20 @@ using ClassLibrary;
 
 public partial class _1_StaffDataEntry : Page
 {
+    Int32 EmployeeId;
     protected void Page_Load(object sender, EventArgs e)
     {
+        // get the number of the staff to be processed
+        EmployeeId = Convert.ToInt32(Session["EmployeeId"]);
+        if (!IsPostBack)
+        {
+            // if this is not a new record
+            if (EmployeeId != -1)
+            {
+                // display the current data for the record
+                DisplayStaff();
+            }
+        }
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -18,13 +30,13 @@ public partial class _1_StaffDataEntry : Page
         clsStaff AllStaff = new clsStaff();
 
         // Convert and capture data, handling any necessary type conversions
-        int employeeId;
-        if (!int.TryParse(txtEmployeeID.Text, out employeeId))
+        int EmployeeId;
+        if (!int.TryParse(txtEmployeeID.Text, out EmployeeId))
         {
             ShowError("Invalid Employee ID format. Please enter a valid integer value.");
             return;
         }
-        AllStaff.EmployeeId = employeeId;
+        AllStaff.EmployeeId = EmployeeId;
 
         string fullName = txtFullName.Text;
         string contactPhone = txtContactPhone.Text;
@@ -37,21 +49,32 @@ public partial class _1_StaffDataEntry : Page
         if (Error=="")
         {
             // Set the data
+            AllStaff.EmployeeId= EmployeeId;
             AllStaff.FullName = fullName;
             AllStaff.ContactPhone = contactPhone;
             AllStaff.ContactEmail = contactEmail;
             AllStaff.Role = role;
             AllStaff.Department = department;
+            AllStaff.IsActive = chkIsActive.Checked;
             // create a new instance of the staff collection
             clsStaffCollection StaffList = new clsStaffCollection();
-            // set the ThisStaff property
-            StaffList.ThisStaff = AllStaff;
-            // add the new record
-            StaffList.Add();
-            // redirect back to the list page
-            Response.Redirect("StaffList.aspx");
-            // Navigate to the viewer page
-            Response.Redirect("StaffViewer.aspx");
+            // if this is a new record, add the data
+            if (EmployeeId == -1)
+            {
+                // set the ThisStaff property
+                StaffList.ThisStaff = AllStaff;
+                // add the new record
+                StaffList.Add();
+            }
+            else
+            {
+                // find the record to update
+                StaffList.ThisStaff.Find(EmployeeId);
+                // set the ThisStaff property
+                StaffList.ThisStaff = AllStaff;
+                // update the record
+                StaffList.Update();
+            }
         }
         else
         {
@@ -84,16 +107,16 @@ public partial class _1_StaffDataEntry : Page
         clsStaff AStaff = new clsStaff();
 
         // Create a variable to store the primary key
-        Int32 StaffId;
+        Int32 EmployeeId;
 
         // Create a variable to store the result of the find operation
         Boolean Found = false;
 
         // Get the primary key entered by the user
-        StaffId = Convert.ToInt32(txtEmployeeID.Text);
+        EmployeeId = Convert.ToInt32(txtEmployeeID.Text);
 
         // Find the record
-        Found = AStaff.Find(StaffId);
+        Found = AStaff.Find(EmployeeId);
 
         // If found, display the values of the properties in the form
         if (Found == true)
@@ -105,5 +128,23 @@ public partial class _1_StaffDataEntry : Page
             txtDepartment.Text = AStaff.Department;
             chkIsActive.Checked = AStaff.IsActive;
         }
+
     }
+    void DisplayStaff()
+    {
+        // create an instance of the staff collection
+        clsStaffCollection StaffBook = new clsStaffCollection();
+        // find the record to update
+        StaffBook.ThisStaff.Find(EmployeeId);
+
+        // display the data for the record
+        txtEmployeeID.Text = StaffBook.ThisStaff.EmployeeId.ToString();
+        txtFullName.Text = StaffBook.ThisStaff.FullName.ToString();
+        txtRole.Text = StaffBook.ThisStaff.Role.ToString();
+        txtContactPhone.Text = StaffBook.ThisStaff.ContactPhone.ToString();
+        txtContactEmail.Text = StaffBook.ThisStaff.ContactEmail.ToString();
+        txtDepartment.Text = StaffBook.ThisStaff.Department.ToString();
+        chkIsActive.Checked = StaffBook.ThisStaff.IsActive;
+    }
+
 }
