@@ -143,6 +143,8 @@ namespace TestingCustmerCollection
             TestItem.IsActive = false;
             AllCustomers.ThisCustomer = TestItem;
             AllCustomers.Update();
+            
+
 
             // Retrieve the updated record and check
             AllCustomers.ThisCustomer.Find(PrimaryKey);
@@ -187,7 +189,7 @@ namespace TestingCustmerCollection
         {
             clsCustomerCollection AllCustomers = new clsCustomerCollection();
             clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
-            FilteredCustomers.ReportByFullName("XXXXX XXXX");
+            FilteredCustomers.ReportByFullName("flan bnflan");
             Assert.AreEqual(0, FilteredCustomers.Count);
         }
         [TestMethod]

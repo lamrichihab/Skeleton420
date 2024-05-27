@@ -9,11 +9,20 @@ using ClassLibrary;
 
 public partial class _1_List : System.Web.UI.Page
 {
-    Int32 CustomerId;
+    Int32 CustomerID;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (IsPostBack == false)
         {
+            if (Session["UserName"] != null)
+            {
+                lblUserName.Text = "Logged in as: " + Session["UserName"].ToString();
+            }
+            else
+            {
+                // Redirect to login page if no user is logged in
+                Response.Redirect("StockLogin.aspx");
+            }
             DisplayCustomers();
         }
 

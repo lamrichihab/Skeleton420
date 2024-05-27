@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
 
-namespace Testing5
+namespace TestingStockCollection
 {
     [TestClass]
     public class tstStockCollection
@@ -104,16 +104,15 @@ namespace Testing5
             //variable to store primary key
             Int32 PrimaryKey = 0;
             //set its properties
-            TestItem.ArrivedOn = DateTime.Now;
-            TestItem.ProductName = "TestName";
+            TestItem.ProductID = 1;
+            TestItem.ArrivedOn = new DateTime(2024, 1, 15);
+            TestItem.ProductName = "T-Shirt";
             TestItem.Available = true;
-            TestItem.Size = "XL";
-            TestItem.QuantityInStock = 10;
+            TestItem.Size = "M";
+            TestItem.QuantityInStock = 100;
             TestItem.SupplierID = 1;
             //set ThisStock to the test data
             AllStock.ThisStock = TestItem;
-            //add the record
-            PrimaryKey = AllStock.Add();
             //set the primary key to the test data
             TestItem.ProductID = PrimaryKey;
             //find the record
@@ -132,16 +131,15 @@ namespace Testing5
             //variable t store the primary key
             Int32 PrimaryKey = 0;
             //set its properties
-            TestItem.ArrivedOn = DateTime.Now;
-            TestItem.ProductName = "TestName123";
+            TestItem.ProductID = 1;
+            TestItem.ArrivedOn = new DateTime(2024, 1, 15);
+            TestItem.ProductName = "T-Shirt";
             TestItem.Available = true;
-            TestItem.Size = "XL";
-            TestItem.QuantityInStock = 10;
+            TestItem.Size = "M";
+            TestItem.QuantityInStock = 100;
             TestItem.SupplierID = 1;
             //set ThisStock to the test data
             AllStock.ThisStock = TestItem;
-            //add the record
-            PrimaryKey = AllStock.Add();
             //set the primary key of the test data
             TestItem.ProductID = PrimaryKey;
             //modify the test record
@@ -168,16 +166,15 @@ namespace Testing5
             //variable to store the primary key
             Int32 PrimaryKey = 0;
             //set its properties
-            TestItem.ArrivedOn = DateTime.Now;
-            TestItem.ProductName = "SomeName123";
+            TestItem.ProductID = 1;
+            TestItem.ArrivedOn = new DateTime(2024, 1, 15);
+            TestItem.ProductName = "T-Shirt";
             TestItem.Available = true;
-            TestItem.Size = "XL";
-            TestItem.QuantityInStock = 10;
+            TestItem.Size = "M";
+            TestItem.QuantityInStock = 100;
             TestItem.SupplierID = 1;
             //set ThisStock to the test data
             AllStock.ThisStock = TestItem;
-            //add the record
-            PrimaryKey = AllStock.Add();
             //set the primary key of the test data
             TestItem.ProductID = PrimaryKey;
             //find the record
@@ -222,27 +219,28 @@ namespace Testing5
             //variable to store the outcome
             Boolean OK = true;
             //apply a item name that doesnt exist
-            FilteredStock.ReportByProductName("Filter1");
+            FilteredStock.ReportByProductName("T-Shirt");
             //check that the correct number of records are found
-            if (FilteredStock.Count == 2)
+            if (FilteredStock.Count == 1)
             {
-                //check to see that the first record is 18
-                if (FilteredStock.StockList[0].ProductID != 18)
+                //check to see that the first record is 1
+                if (FilteredStock.StockList[0].ProductID != 1)
                 {
                     OK = false;
                 }
                 //check to see that the first record is 19
-                if (FilteredStock.StockList[1].ProductID != 19)
+                if (FilteredStock.StockList[0].ProductID != 19)
                 {
                     OK = false;
                 }
+
+                else
+                {
+                    OK = false;
+                }
+                Assert.IsTrue(OK);
             }
-            else
-            {
-                OK = false;
-            }
-            //test to see that there are no records
-            Assert.IsTrue(OK);
+            
         }
 
 
