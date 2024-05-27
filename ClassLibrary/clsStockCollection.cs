@@ -67,10 +67,8 @@ namespace ClassLibrary
 
         public int Add()
         {
-            //adds a record to the database based on the values of mThisStock
-            //connect to db
+
             clsDataConnection DB = new clsDataConnection();
-            //set the parameters for the stored procedure
             DB.AddParameter("@ProductName", mThisStock.ProductName);
             DB.AddParameter("@QuantityInStock", mThisStock.QuantityInStock);
             DB.AddParameter("@Size", mThisStock.Size);

@@ -21,8 +21,8 @@
             <asp:TextBox ID="txtProductName" runat="server" style="width: 150px;" />
         </p>
         <p>
-            <asp:Label ID="lblCategory" runat="server" Text="Category" style="display: inline-block; width: 120px;" />
-            <asp:TextBox ID="txtArrivedOn" runat="server" style="width: 150px;" />
+            <asp:Label ID="lblArrivedOn" runat="server" Text="Account Creation Date" style="display: inline-block; width: 120px;" />
+            <asp:TextBox ID="txtArrivedOn" runat="server" style="width: 150px;" TextMode="Date" />
         </p>
         <p>
             <asp:Label ID="lblQuantityInStock" runat="server" Text="Quantity in Stock" style="display: inline-block; width: 120px;" />

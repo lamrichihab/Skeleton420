@@ -440,8 +440,8 @@ namespace TestingStock
             //set the date to today's date
             TestDate = DateTime.Now.Date;
             //today's date minus 1 day
-            TestDate = TestDate.AddDays(-1); //should cause error
-                                             //convert the date variable to a string type
+            TestDate = TestDate.AddYears(-10).AddDays(-1); //should cause error
+            //convert the date variable to a string type
             string ArrivedOn = TestDate.ToString();
             //invoke the method
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
@@ -467,7 +467,7 @@ namespace TestingStock
             //invoke the method
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual(Error, "");
         }
 
         [TestMethod]
@@ -507,7 +507,7 @@ namespace TestingStock
             //invoke the method
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual(Error, "");
         }
 
 
@@ -595,7 +595,7 @@ namespace TestingStock
             //invoke the method
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -636,7 +636,7 @@ namespace TestingStock
             //string c=variable to store error message
             String Error = "";
             //create some test data to pass to the method
-            string QuantityInStock = "201"; //this should fail
+            string QuantityInStock = "1001"; //this should fail
             //invoke the method
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct

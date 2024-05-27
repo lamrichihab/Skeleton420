@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Testing5
+namespace TestingStockUser
 {
     [TestClass]
     public class tstStockUser
@@ -76,7 +76,7 @@ namespace Testing5
             //create a boolean var to store the results
             Boolean Found = false;
             //create test data to use with method
-            string UserName = "Zain";
+            string UserName = "Chihab";
             string Password = "password3";
             //invoke method
             Found = User.FindUser(UserName, Password);

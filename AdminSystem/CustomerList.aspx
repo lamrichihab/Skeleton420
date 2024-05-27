@@ -53,10 +53,17 @@
         .spacer {
             margin-top: 10px;
         }
+        .user-info {
+            text-align: right;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <form id="form2" runat="server" class="form-container">
+        <div class="user-info">
+            <asp:Label ID="lblUserName" runat="server" Text=""></asp:Label>
+        </div>
         <div class="form-group">
             <asp:ListBox ID="lstCustomerList" runat="server" Height="316px" Width="364px"></asp:ListBox>
         </div>
@@ -73,7 +80,6 @@
             <asp:Button ID="btnApply" runat="server" OnClick="btnApply_Click" Text="Apply" class="inline" />
             <asp:Button ID="btnClear" runat="server" OnClick="btnClear_Click" Text="Clear" class="inline" />
             <asp:Button ID="btnReturn" runat="server" Text="Return to Main Menu" Width="168px" OnClick="btnReturn_Click" />
-
         </div>
         <div class="form-group">
             <asp:Label ID="lblError" runat="server" Width="420px" CssClass="error-label"></asp:Label>
