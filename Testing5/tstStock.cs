@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ClassLibrary;
 using System;
-using System.Diagnostics;
 
-namespace Testing6
+namespace TestingStock
 {
     [TestClass]
     public class tstStock
@@ -68,17 +67,17 @@ namespace Testing6
         public void ArrivedOnPropertyOK()
         {
             //create an instance of the class
-            clsStock2 StockItem = new clsStock2();
+            clsStock2 Stock = new clsStock2();
             //create test data to assign to property
-            DateTime TestData = DateTime.Now.Date;
+            DateTime TestData = new DateTime(2022, 1, 1);
             //assign the data to the property
-            StockItem.ArrivedOn = TestData;
+            Stock.ArrivedOn = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(StockItem.ArrivedOn, TestData);
+            Assert.AreEqual( TestData, Stock.ArrivedOn);
         }
 
-        //================================================ Size============================================================
-        [TestMethod]
+    //================================================ Size============================================================
+    [TestMethod]
         public void SizePropertyOK()
         {
             // Test to check if Size property can be set and retrieved correctly
@@ -157,7 +156,7 @@ namespace Testing6
             //invoke the method
             Found = StockItem.Find(ProductID);
             //check the arrived on property
-            if (StockItem.ArrivedOn != Convert.ToDateTime("12/05/2024"))
+            if (StockItem.ArrivedOn != Convert.ToDateTime("15/01/2024"))
             {
                 OK = false;
             }
@@ -179,7 +178,7 @@ namespace Testing6
             //invoke the method
             Found = StockItem.Find(ProductID);
             //check the item name property
-            if (StockItem.ProductName != "ASUS Radeon RX 7900 XTX 24GB")
+            if (StockItem.ProductName != "Dress")
             {
                 OK = false;
             }
@@ -201,7 +200,7 @@ namespace Testing6
             //invoke the method
             Found = StockItem.Find(ProductID);
             //check the quantity property
-            if (StockItem.QuantityInStock != 10)
+            if (StockItem.QuantityInStock != 60)
             {
                 OK = false;
             }
@@ -210,10 +209,10 @@ namespace Testing6
         }
 
         [TestMethod]
-        public void TestPriceFound()
+        public void TestSizeFound()
         {
             //create an instance of the class
-            clsStock2 StockItem = new clsStock2();
+            clsStock2 Stock = new clsStock2();
             //create a boolean variable to store the result of the search
             Boolean Found = false;
             //create a boolean variable to record if the data is ok (assume it is)
@@ -221,9 +220,9 @@ namespace Testing6
             //create test data
             Int32 ProductID = 4;
             //invoke the method
-            Found = StockItem.Find(ProductID);
+            Found = Stock.Find(ProductID);
             //check the price property
-            if (StockItem.Size != "Medium")
+            if (Stock.Size != "S")
             {
                 OK = false;
             }
@@ -281,7 +280,7 @@ namespace Testing6
         string ArrivedOn = DateTime.Now.ToShortDateString();
         string QuantityInStock = "19";
         string Size = "1699.99";
-        string SupplierID ="1";
+        string SupplierID = "1";
 
         [TestMethod]
         public void ProductNameMinLessOne()
@@ -461,12 +460,14 @@ namespace Testing6
             DateTime TestDate;
             //set the date to today's date
             TestDate = DateTime.Now.Date;
+            //today's date minus 100 years
+            TestDate = TestDate.AddYears(-10);
             //convert the date variable to a string type
             string ArrivedOn = TestDate.ToString();
             //invoke the method
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -506,8 +507,9 @@ namespace Testing6
             //invoke the method
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
+
 
         [TestMethod]
         public void ArrivedOnMaxPlusOne()
@@ -557,13 +559,13 @@ namespace Testing6
             //create instance
             clsStock2 StockItem = new clsStock2();
             //string c=variable to store error message
-            String Error = "";
+            String error = "";
             //create some test data to pass to the method
             string QuantityInStock = "-1"; //this should cause an error
             //invoke the method
-            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual(error, "");
         }
 
         [TestMethod]
@@ -572,13 +574,13 @@ namespace Testing6
             //create instance
             clsStock2 StockItem = new clsStock2();
             //string c=variable to store error message
-            String Error = "";
+            String error = "";
             //create some test data to pass to the method
             string QuantityInStock = "0"; //this should pass
             //invoke the method
-            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual(error, "");
         }
 
         [TestMethod]
@@ -634,7 +636,7 @@ namespace Testing6
             //string c=variable to store error message
             String Error = "";
             //create some test data to pass to the method
-            string QuantityInStock = "1001"; //this should fail
+            string QuantityInStock = "201"; //this should fail
             //invoke the method
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct
@@ -679,7 +681,7 @@ namespace Testing6
             //string c=variable to store error message
             String Error = "";
             //create some test data to pass to the method
-            string SupplierID = "0"; //this should fail
+            string SupplierID = ""; //this should fail
             //invoke the method
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct

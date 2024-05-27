@@ -101,7 +101,7 @@ namespace ClassLibrary // Adjust to your project's namespace
         }
 
         //================================================== Validation Method ==================================================
-        public string Valid(string productName, string arrivedOn, string quantityInStock, string size, string supplierId)
+        public string Valid(string productName, string arrivedOn, string QuantityInStock, string size, string supplierID)
         {
             // Variable to store the error message
             string error = "";
@@ -146,7 +146,7 @@ namespace ClassLibrary // Adjust to your project's namespace
             //================================================ Quantity In Stock Validation ================================================
             //create temporary variable to store the int values
             int QuantityTemp;
-            if (QuantityInStock == 0 )
+            if (string.IsNullOrWhiteSpace(QuantityInStock))
             {
                 error = error + "Quantity cannot be left blank";
             }
@@ -184,11 +184,10 @@ namespace ClassLibrary // Adjust to your project's namespace
             }
 
             //================================================ Supplier ID Validation ================================================
-            if (string.IsNullOrWhiteSpace(supplierId))
+            if (string.IsNullOrWhiteSpace(supplierID))
             {
                 error += "Supplier ID  is required. ";
             }
-
             // Return any error messages, or an empty string if there are no errors
             return error;
         }

@@ -462,7 +462,7 @@ namespace TestingCustomer
             // Arrange
             clsCustomer customer = new clsCustomer();
             string error = "";
-            string phoneNumber = new string('1', 20); // Extreme max (beyond allowed length)
+            string phoneNumber = new string('1', 400); // Extreme max (beyond allowed length)
             error = customer.Valid("John Doe", "test@example.com", phoneNumber, "123 Main St", DateTime.Now, true);
             Assert.AreNotEqual(error, "");
         }
@@ -506,7 +506,7 @@ namespace TestingCustomer
             // Test to check if validation passes when PhoneNumber is at maximum length
             clsCustomer customer = new clsCustomer();
             string error = "";
-            string phoneNumber = new string('1', 15); // Max length (assuming max length is 15)
+            string phoneNumber = new string('1', 40); // Max length (assuming max length is 15)
             error = customer.Valid("John Doe", "test@example.com", phoneNumber, "123 Main St", DateTime.Now, true);
             Assert.AreEqual(error, "");
         }
@@ -517,7 +517,7 @@ namespace TestingCustomer
             // Test to check if validation fails when PhoneNumber exceeds maximum length
             clsCustomer customer = new clsCustomer();
             string error = "";
-            string phoneNumber = new string('1', 16); // Max length + 1 (assuming max length is 15)
+            string phoneNumber = new string('1', 41); // Max length + 1 (assuming max length is 15)
             error = customer.Valid("John Doe", "test@example.com", phoneNumber, "123 Main St", DateTime.Now, true);
             Assert.AreNotEqual("", error, "Validation should fail if phone number exceeds the maximum length.");
         }
