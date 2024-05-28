@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 
@@ -9,32 +10,10 @@ namespace ClassLibrary
 
         public clsStaffCollection()
         {
-            //variable for the index
-            Int32 Index = 0;
-            //variable to store the record count
-            Int32 RecordCount = 0;
+           
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("sproc_tblStaff_SelectAll");
-            //get the count of records
-            RecordCount = DB.Count;
-            while (Index < RecordCount)
-            {
-                //create a blank staff object
-                clsStaff AStaff = new clsStaff();
-                //read in the fields from the current record
-                // Copy the data from the database to the private data members
-                AStaff.EmployeeId = Convert.ToInt32(DB.DataTable.Rows[Index]["EmployeeId"]);
-                AStaff.FullName = Convert.ToString(DB.DataTable.Rows[Index]["FullName"]);
-                AStaff.Role = Convert.ToString(DB.DataTable.Rows[Index]["Role"]);
-                AStaff.ContactEmail = Convert.ToString(DB.DataTable.Rows[Index]["ContactEmail"]);
-                AStaff.ContactPhone = Convert.ToString(DB.DataTable.Rows[Index]["ContactPhone"]);
-                AStaff.Department = Convert.ToString(DB.DataTable.Rows[Index]["Department"]);
-                AStaff. IsActive = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsActive"]);
-                //add the record to the private data member
-                mStaffList.Add(AStaff);
-                //point at the next record
-                Index++;
-            }
+            PopulateArray(DB);
         }
         // private data member for the list
         List<clsStaff> mStaffList = new List<clsStaff>();
@@ -83,24 +62,70 @@ namespace ClassLibrary
 
         public void Update()
         {
-           
-                // Update an existing record based on the values of mThisStaff
-                // Connect to the database
-                clsDataConnection DB = new clsDataConnection();
 
-                // Set the parameters for the new stored procedure
-                DB.AddParameter("@EmployeeId", mThisStaff.EmployeeId);
-                DB.AddParameter("@FullName", mThisStaff.FullName);
-                DB.AddParameter("@Role", mThisStaff.Role);
-                DB.AddParameter("@ContactPhone", mThisStaff.ContactPhone);
-                DB.AddParameter("@ContactEmail", mThisStaff.ContactEmail);
-                DB.AddParameter("@Department", mThisStaff.Department);
-                DB.AddParameter("@IsActive", mThisStaff.IsActive);
+            // Update an existing record based on the values of mThisStaff
+            // Connect to the database
+            clsDataConnection DB = new clsDataConnection();
 
-                // Execute the stored procedure
-                DB.Execute("sproc_tblStaff_Update");
-         
+            // Set the parameters for the new stored procedure
+            DB.AddParameter("@EmployeeId", mThisStaff.EmployeeId);
+            DB.AddParameter("@FullName", mThisStaff.FullName);
+            DB.AddParameter("@Role", mThisStaff.Role);
+            DB.AddParameter("@ContactPhone", mThisStaff.ContactPhone);
+            DB.AddParameter("@ContactEmail", mThisStaff.ContactEmail);
+            DB.AddParameter("@Department", mThisStaff.Department);
+            DB.AddParameter("@IsActive", mThisStaff.IsActive);
 
+            // Execute the stored procedure
+            DB.Execute("sproc_tblStaff_Update");
+
+
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@EmployeeId", mThisStaff.EmployeeId);
+            DB.Execute("sproc_tblStaff_Delete");
+        }
+
+        public void ReportByDepartment(string Department)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Department", Department);
+            DB.Execute("sproc_tblStaff_FilterByDepartment");
+            PopulateArray(DB);
+        }
+        void PopulateArray(clsDataConnection DB)
+        {
+            //populates the array list based on the data table in the parameter DB
+            //variable for the index
+            Int32 Index = 0;
+            //variable to store the record count
+            Int32 RecordCount;
+            //get the count of records
+            RecordCount = DB.Count;
+            //clear the private array list
+            mStaffList = new List<clsStaff>();
+            //while there are records to process
+            while (Index < RecordCount)
+            {
+                // create a blank staff object
+                clsStaff AStaff = new clsStaff();
+                //read in the fields from the current record
+                // Copy the data from the database to the private data members
+                AStaff.EmployeeId = Convert.ToInt32(DB.DataTable.Rows[Index]["EmployeeId"]);
+                AStaff.FullName = Convert.ToString(DB.DataTable.Rows[Index]["FullName"]);
+                AStaff.Role = Convert.ToString(DB.DataTable.Rows[Index]["Role"]);
+                AStaff.ContactEmail = Convert.ToString(DB.DataTable.Rows[Index]["ContactEmail"]);
+                AStaff.ContactPhone = Convert.ToString(DB.DataTable.Rows[Index]["ContactPhone"]);
+                AStaff.Department = Convert.ToString(DB.DataTable.Rows[Index]["Department"]);
+                AStaff.IsActive = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsActive"]);
+                //add the record to the private data member
+                mStaffList.Add(AStaff);
+                //point at the next record
+                Index++;
+            }
         }
     }
 }
