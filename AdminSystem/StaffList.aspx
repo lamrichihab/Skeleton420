@@ -11,7 +11,7 @@
         <div></div>
         <asp:ListBox ID="lstStaffList" runat="server" 
             Style="z-index: 1; left: 23px; top: 45px; position: absolute; height: 210px; width: 393px" 
-            OnSelectedIndexChanged="lstStaffList_SelectedIndexChanged"></asp:ListBox>
+          ></asp:ListBox>
         <asp:Button ID="btnAdd" runat="server" Text="Add" 
             Style="z-index: 1; left: 19px; top: 283px; position: absolute; width: 40px; height: 30px;" 
             OnClick="btnAdd_Click" />

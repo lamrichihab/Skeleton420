@@ -46,6 +46,7 @@
     <Compile Include="clsCustomerCollection.cs" />
     <Compile Include="clsOrder.cs" />
     <Compile Include="clsStaffCollection.cs" />
+    <Compile Include="clsStaffUser.cs" />
     <Compile Include="clsStock2.cs" />
     <Compile Include="clsDataConnection.cs" />
     <Compile Include="clsOrderlines.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="clsStockCollection.cs" />
     <Compile Include="clsStockUser.cs" />
     <Compile Include="clsSupplier.cs" />
+    <Compile Include="clsSupplierUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
