@@ -5,35 +5,108 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Staff List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="button"],
+        .form-group button,
+        .form-group select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+        .button-group {
+            text-align: center;
+        }
+        .button-group input[type="button"],
+        .button-group button {
+            width: 100px;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button-group input[type="button"]:hover,
+        .button-group button:hover {
+            background-color: #0056b3;
+        }
+        .error-label {
+            color: red;
+            margin-top: 10px;
+            display: block;
+            font-size: 14px;
+        }
+        .spacer {
+            margin-top: 20px;
+        }
+        .return-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .return-button a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .return-button a:hover {
+            color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div></div>
-        <asp:ListBox ID="lstStaffList" runat="server" 
-            Style="z-index: 1; left: 23px; top: 45px; position: absolute; height: 210px; width: 393px" 
-          ></asp:ListBox>
-        <asp:Button ID="btnAdd" runat="server" Text="Add" 
-            Style="z-index: 1; left: 19px; top: 283px; position: absolute; width: 40px; height: 30px;" 
-            OnClick="btnAdd_Click" />
-        <asp:Label ID="lblError" runat="server" 
-            Style="z-index: 1; left: 10px; top: 423px; position: absolute"></asp:Label>
-        <asp:Button ID="btnEdit" runat="server" OnClick="BtnEdit_Click" 
-            Style="z-index: 1; top: 284px; position: absolute; height: 30px; width: 40px; right: 1355px;" 
-            Text="Edit" />
-        <asp:Label ID="lbDepartment" runat="server" 
-            Style="z-index: 1; left: 60px; top: 337px; position: absolute; height: 23px; right: 1332px" 
-            Text="Enter a Department"></asp:Label>
-        <asp:TextBox ID="txtFilter" runat="server" 
-            Style="z-index: 1; left: 198px; top: 336px; position: absolute; width: 135px"></asp:TextBox>
-        <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" 
-            Style="z-index: 1; left: 124px; top: 380px; position: absolute; height: 25px; width: 90px" 
-            Text="Apply Filter" />
-        <asp:Button ID="btnDelete" runat="server" OnClick="Button1_Click" 
-            Style="z-index: 1; top: 282px; position: absolute; height: 30px; width: 40px; left: 217px" 
-            Text="Delete" />
-        <asp:Button ID="btnClearFilter" runat="server" OnClick="Button1_Click1" 
-            Style="z-index: 1; top: 380px; position: absolute; height: 25px; width: 88px; left: 254px" 
-            Text="Clear Filter" />
-    </form>
+    <div class="container">
+        <form id="form1" runat="server">
+            <div class="form-group">
+                <label for="lstStaffList">Staff List</label>
+                <asp:ListBox ID="lstStaffList" runat="server" Style="height: 210px; width: 100%;" />
+            </div>
+            <div class="button-group">
+                <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" />
+                <asp:Button ID="btnEdit" runat="server" Text="Edit" OnClick="BtnEdit_Click" />
+                <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="Button1_Click" />
+            </div>
+            <div class="form-group spacer">
+                <label for="txtFilter">Filter by Department</label>
+                <asp:TextBox ID="txtFilter" runat="server"></asp:TextBox>
+                <asp:Button ID="btnApplyFilter" runat="server" OnClick="btnApplyFilter_Click" Text="Apply Filter" />
+                <asp:Button ID="btnClearFilter" runat="server" OnClick="Button1_Click1" Text="Clear Filter" />
+            </div>
+            <div class="form-group">
+                <asp:Label ID="lblError" runat="server" CssClass="error-label"></asp:Label>
+            </div>
+            <div class="return-button">
+                <asp:Button ID="btnReturn" runat="server" Text="Return to Main Menu" OnClick="btnReturn_Click" />
+            </div>
+        </form>
+    </div>
 </body>
 </html>
