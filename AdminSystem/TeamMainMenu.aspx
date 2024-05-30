@@ -15,6 +15,8 @@
             <asp:Button ID="btnCustomerData" runat="server" Height="35px" OnClick="btnCustomer_Click" Text="Customer" Width="80px" />
             &nbsp;
             <asp:Button ID="btnStockData" runat="server" Height="35px" OnClick="btnStockData_Click" Text="Stock" Width="80px" />
+            <asp:Button ID="btnStaffData" runat="server" style="z-index: 1; left: 204px; top: 53px; position: absolute; width: 80px; height: 35px" Text="Staff" OnClick="btnStaffData_Click" />
+            <asp:Button ID="btnSupplierData" runat="server" OnClick="btnSupplierData_Click" style="z-index: 1; top: 52px; position: absolute; width: 80px; height: 35px; left: 319px" Text="Supplier" />
             <br />
         </div>
     </form>
