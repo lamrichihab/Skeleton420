@@ -34,7 +34,7 @@ public partial class SupplierLogin : System.Web.UI.Page
         else if (Found == true)
         {
             Session["UserName"] = UserName; // Store the username in the session
-            Response.Redirect("StaffList.aspx");
+            Response.Redirect("SupplierList.aspx");
         }
         else if (Found == false)
         {

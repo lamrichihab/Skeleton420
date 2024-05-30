@@ -13,12 +13,18 @@ public partial class _1_List : System.Web.UI.Page
         // If this is the first time the page is displayed
         if (IsPostBack == false)
         {
+            if (Session["UserName"] != null)
+            {
+                lblUserName.Text = "Logged in as: " + Session["UserName"].ToString();
+            }
+            else
+            {
+                // Redirect to login page if no user is logged in
+                Response.Redirect("StockLogin.aspx");
+            }
             // Update the list box
             DisplayStaffs();
         }
-        clsStaffUser AnUser = new clsStaffUser();
-        AnUser = (clsStaffUser)Session["AnUser"];
-        Response.Write("Loged in as " + AnUser.UserName);
     }
     void DisplayStaffs()
     {
