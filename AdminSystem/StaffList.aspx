@@ -9,7 +9,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f5f5f5;
+            background-color: #3D4D55;
         }
         .container {
             max-width: 600px;
@@ -17,7 +17,7 @@
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: #fff;
+            background-color: #3D4D55;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .form-group {
@@ -49,14 +49,14 @@
             margin: 0 10px;
             border: none;
             border-radius: 3px;
-            background-color: #007bff;
+            background-color: #A79E9C;
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
         .button-group input[type="button"]:hover,
         .button-group button:hover {
-            background-color: #0056b3;
+            background-color: #B58863;
         }
         .error-label {
             color: red;
@@ -73,18 +73,21 @@
         }
         .return-button a {
             text-decoration: none;
-            color: #007bff;
+            color: #B58863;
             font-weight: bold;
             transition: color 0.3s ease;
         }
         .return-button a:hover {
-            color: #0056b3;
+            color: #B58863;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <form id="form1" runat="server">
+             <div class="user-info">
+                <asp:Label ID="lblUserName" runat="server" Text=""></asp:Label>
+             </div>
             <div class="form-group">
                 <label for="lstStaffList">Staff List</label>
                 <asp:ListBox ID="lstStaffList" runat="server" Style="height: 210px; width: 100%;" />
