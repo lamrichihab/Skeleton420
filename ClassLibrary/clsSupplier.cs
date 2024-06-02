@@ -110,7 +110,7 @@ namespace ClassLibrary
             }
 
             // Validate Supplier Contact Email
-            if (supplierContactEmail.Length < 10)
+            if (supplierContactEmail.Length < 11)
             {
                 error += "Supplier Contact Email is too short ";
             }
