@@ -9,7 +9,7 @@ namespace Testing4
     public class tstSupplierCollection
     {
         [TestMethod]
-        public void TestMethod1()
+        public void InstanceOk()
         {
             clsSupplierCollection AllSupplier = new clsSupplierCollection();
             Assert.IsNotNull(AllSupplier);
@@ -176,7 +176,17 @@ namespace Testing4
         {
             clsSupplierCollection AllSuppliers = new clsSupplierCollection();
             clsSupplierCollection FilteredSuppliers = new clsSupplierCollection();
-            FilteredSuppliers.ReportByContactName("Nonexistent Supplier");
+            FilteredSuppliers.ReportByContactName("");
+            Assert.AreEqual(AllSuppliers.Count, FilteredSuppliers.Count);
+        }
+        [TestMethod]
+        public void ReportByContactNameNoneFound()
+        {
+            // create an instance of the class we want to create
+            clsSupplierCollection FilteredSuppliers = new clsSupplierCollection();
+            // apply a Department that doesn't exist
+            FilteredSuppliers.ReportByContactName("xxx xxx");
+            // test to see that there are no records
             Assert.AreEqual(0, FilteredSuppliers.Count);
         }
         [TestMethod]

@@ -72,7 +72,7 @@ namespace ClassLibrary
             DB.AddParameter("@EmployeeId", EmployeeId);
             // Execute the stored procedure
             DB.Execute("sproc_tblStaff_FilterByEmployeeID");
-            // If one record is found (there should be one or zero)
+            // If one record is found 
             if (DB.Count == 1)
             {
                 // Copy the data from the database to the private data members
@@ -107,7 +107,7 @@ namespace ClassLibrary
                 Error = Error + "The Fullname must be less than 50 characters : ";
             }
             //if the email is blank
-            if (contactemail.Length < 10)
+            if (contactemail.Length < 11)
             {
                 Error = Error + "The Contact email may not be blank : ";
             }

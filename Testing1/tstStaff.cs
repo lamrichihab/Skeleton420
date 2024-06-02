@@ -8,13 +8,20 @@ namespace Testing6
     [TestClass]
     public class tstStaff
     {
-        //goodtestdata
-        //create some test data to pass the valid methode
+        //============================= Test Data =============================
+
+
         string fullname = "Mohamed Mekhalfi";
+
         string contactemail = "mohamedmekhalfi@gmail.com";
+
         string contactphone = "123456789";
+
         string department = "HR";
+
         string role = "manager";
+
+        //========================Staff Instance and Properties======================================
 
         [TestMethod]
         public void StaffInstanceOK()
@@ -126,6 +133,8 @@ namespace Testing6
             Assert.AreEqual(testData, Allstaff.IsActive);
         }
 
+        //=============================== Find Method Tests =========================================
+
         [TestMethod]
         public void FindMethodOK()
         {
@@ -136,7 +145,7 @@ namespace Testing6
             bool found = false;
 
             // Create some test data to use with the method
-            int EmployeeId = 12345; // Assuming employee with ID 123 exists
+            int EmployeeId = 2;
 
             // Invoke the method
             found = Allstaff.Find(EmployeeId);
@@ -158,13 +167,13 @@ namespace Testing6
             bool ok = true;
 
             // Create some test data to use with the method
-            int EmployeeId = 12345; // Assuming staff with ID 12345 exists
+            int EmployeeId = 2; // Assuming staff with ID 12345 exists
 
             // Invoke the method
             found = Allstaff.Find(EmployeeId);
 
             // Check the employee ID
-            if (Allstaff.EmployeeId != 12345)
+            if (Allstaff.EmployeeId != 2)
             {
                 ok = false;
             }
@@ -183,11 +192,11 @@ namespace Testing6
             // Create a Boolean variable to record if data is OK (assume it is)
             bool ok = true;
             // Create some test data to use with the method
-            int EmployeeID = 12345;
+            int EmployeeID = 2;
             // Invoke the method
             found = Allstaff.Find(EmployeeID);
             // Check the FullName property
-            if (Allstaff.FullName != "John Smith")
+            if (Allstaff.FullName != "Mohamed Mekhalfi")
             {
                 ok = false;
             }
@@ -205,7 +214,7 @@ namespace Testing6
             // Create a Boolean variable to record if data is OK (assume it is)
             bool ok = true;
             // Create some test data to use with the method
-            int EmployeeID = 12345;
+            int EmployeeID = 2;
             // Invoke the method
             found = Allstaff.Find(EmployeeID);
             // Check the Role property
@@ -227,11 +236,11 @@ namespace Testing6
             // Create a Boolean variable to record if data is OK (assume it is)
             bool ok = true;
             // Create some test data to use with the method
-            int EmployeeID = 12345;
+            int EmployeeID = 2;
             // Invoke the method
             found = Allstaff.Find(EmployeeID);
             // Check the ContactPhone property
-            if (Allstaff.ContactPhone != "1234567890")
+            if (Allstaff.ContactPhone != "123456789")
             {
                 ok = false;
             }
@@ -249,11 +258,11 @@ namespace Testing6
             // Create a Boolean variable to record if data is OK (assume it is)
             bool ok = true;
             // Create some test data to use with the method
-            int EmployeeID = 12345;
+            int EmployeeID = 2;
             // Invoke the method
             found = Allstaff.Find(EmployeeID);
             // Check the ContactEmail property
-            if (Allstaff.ContactEmail != "test@example.com")
+            if (Allstaff.ContactEmail != "mohamed.mekhalfi@gmail.com")
             {
                 ok = false;
             }
@@ -271,7 +280,7 @@ namespace Testing6
             // Create a Boolean variable to record if data is OK (assume it is)
             bool ok = true;
             // Create some test data to use with the method
-            int EmployeeID = 12345;
+            int EmployeeID = 2;
             // Invoke the method
             found = Allstaff.Find(EmployeeID);
             // Check the Department property
@@ -293,7 +302,7 @@ namespace Testing6
             // Create a Boolean variable to record if data is OK (assume it is)
             bool ok = true;
             // Create some test data to use with the method
-            int EmployeeID = 12345;
+            int EmployeeID = 2;
             // Invoke the method
             found = Allstaff.Find(EmployeeID);
             // Check the IsActive property
@@ -304,6 +313,9 @@ namespace Testing6
             // Test to see that the result is correct
             Assert.IsTrue(ok);
         }
+
+        //=============================== Validation Method Tests =========================================
+
 
         [TestMethod]
         public void ValidMethodOK()
@@ -385,12 +397,32 @@ namespace Testing6
             Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
             Assert.AreNotEqual("", Error);
         }
+
+        [TestMethod]
+
+        public void StaffNameMid()
+
+        {
+
+            clsStaff AllStaff = new clsStaff();
+
+            string error = "";
+
+            string fullName = "";
+
+            fullName = fullName.PadRight(25, 'a');
+
+            error = AllStaff.Valid(fullname, contactemail, contactphone, department, role);
+
+            Assert.AreEqual(error, "");
+
+        }
         [TestMethod]
         public void ContactEmailMinLessOne()
         {
             clsStaff Allstaff = new clsStaff();
             string Error = "";
-            string contactemail = "gmail.com";
+            string contactemail = "@gmail.com";
             Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
             Assert.AreNotEqual("", Error);
         }
@@ -458,6 +490,18 @@ namespace Testing6
             Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
             Assert.AreNotEqual("", Error);
         }
+
+        [TestMethod]
+        public void ContactEmailMid()
+        {
+            clsStaff Allstaff = new clsStaff();
+            string Error = "";
+            string contactemail = "";
+            contactemail = contactemail.PadRight(25, 'a');
+            Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
+            Assert.AreEqual("", Error);
+        }
+
         [TestMethod]
         public void ContactPhoneMinLessOne()
         {
@@ -473,7 +517,7 @@ namespace Testing6
         {
             clsStaff Allstaff = new clsStaff();
             string Error = "";
-            string contactphone = "12";
+            string contactphone = "123";
             Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
             Assert.AreEqual("", Error);
         }
@@ -483,7 +527,7 @@ namespace Testing6
         {
             clsStaff Allstaff = new clsStaff();
             string Error = "";
-            string contactphone = "123";
+            string contactphone = "1234";
             Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
             Assert.AreEqual("", Error);
         }
@@ -533,14 +577,16 @@ namespace Testing6
         }
 
         [TestMethod]
-        public void ContactPhoneInvalidData()
+        public void ContactPhoneMid()
         {
             clsStaff Allstaff = new clsStaff();
             string Error = "";
-            string contactphone = "this is not a phone number";
+            string contactphone = "";
+            contactphone = contactphone.PadRight(9, 'a');
             Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
-            Assert.AreNotEqual("", Error);
+            Assert.AreEqual("", Error);
         }
+
         [TestMethod]
         public void RoleMinLessOne()
         {
@@ -614,6 +660,18 @@ namespace Testing6
             Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
             Assert.AreNotEqual("", Error);
         }
+
+        [TestMethod]
+        public void RoleMid()
+        {
+            clsStaff Allstaff = new clsStaff();
+            string Error = "";
+            string role = "";
+            role = role.PadRight(25, 'a');
+            Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
+            Assert.AreEqual("", Error);
+        }
+
         [TestMethod]
         public void DepartmentMinLessOne()
         {
@@ -686,6 +744,16 @@ namespace Testing6
             department = department.PadRight(500, 'a');
             Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
             Assert.AreNotEqual("", Error);
+        }
+        [TestMethod]
+        public void DepartmentMid()
+        {
+            clsStaff Allstaff = new clsStaff();
+            string Error = "";
+            string department = "";
+            department = department.PadRight(25, 'a');
+            Error = Allstaff.Valid(fullname, contactemail, contactphone, department, role);
+            Assert.AreEqual("", Error);
         }
     }
 }
