@@ -671,8 +671,96 @@ namespace TestingStock
             Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
             //test to see that the result is correct
             Assert.AreNotEqual(Error, "");
+        }      
+        [TestMethod]
+        public void sizeMin()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String error = "";
+            //create some test data to pass to the method
+            Size = "a"; //this should pass
+            //invoke the method
+            error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(error, "");
         }
 
+        [TestMethod]
+        public void sizeMinPlusOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            Size = Size.PadRight(2, 'a'); //this should pass
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void sizeMaxLessOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            Size = Size.PadRight(9, 'a'); //this should fail //this should pass
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void sizeMax()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            Size = Size.PadRight(10, 'a'); //this should fail
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void sizeMaxPlusOne()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            Size = Size.PadRight(11, 'a'); //this should fail
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void sizeExtremeMax()
+        {
+            //create instance
+            clsStock2 StockItem = new clsStock2();
+            //string c=variable to store error message
+            String Error = "";
+            //create some test data to pass to the method
+            Size = Size.PadRight(500, 'a');
+            //invoke the method
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            //test to see that the result is correct
+            Assert.AreNotEqual(Error, "");
+        }
         [TestMethod]
         public void SupplierIDInvalidData()
         {
@@ -687,7 +775,5 @@ namespace TestingStock
             //test to see that the result is correct
             Assert.AreNotEqual(Error, "");
         }
-
-
     }
 }

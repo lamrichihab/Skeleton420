@@ -100,10 +100,13 @@ public partial class _1_DataEntry : Page
         Int32 CustomerID;
         //variable to store the result of the find operation
         Boolean Found = false;
-        //get the primary key entered by the user
-        CustomerID = Convert.ToInt32(txtCustomerID.Text);
-        //find the record
-        Found = ACustomer.Find(CustomerID);
+        if (txtCustomerID.Text != "") 
+        {
+            //get the primary key entered by the user
+            CustomerID = Convert.ToInt32(txtCustomerID.Text);
+            //find the record
+            Found = ACustomer.Find(CustomerID);
+        }
         //if found
         if (Found == true)
         {
