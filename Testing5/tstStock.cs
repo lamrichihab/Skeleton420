@@ -276,11 +276,13 @@ namespace TestingStock
         //================================================ Validation Method ============================================================
 
         //good test data
-        string ProductName = "Gigabyte GeForce RTX 4090 WindForce 24GB";
+        string ProductName = "AA";
         string ArrivedOn = DateTime.Now.ToShortDateString();
         string QuantityInStock = "19";
-        string Size = "1699.99";
+        string Size = "XL";
         string SupplierID = "1";
+
+        //================================================Product Name Validation============================================================
 
         [TestMethod]
         public void ProductNameMinLessOne()
@@ -406,6 +408,8 @@ namespace TestingStock
             //test to see that the result is correct
             Assert.AreNotEqual(Error, "");
         }
+
+        //================================================rrived On Validation============================================================
 
         [TestMethod]
         public void ArrivedOnExtremeMin()
@@ -553,6 +557,8 @@ namespace TestingStock
             Assert.AreNotEqual(Error, "");
         }
 
+        //================================================Quantity In Stock Validation============================================================
+
         [TestMethod]
         public void QuantityInStockMinLessOne()
         {
@@ -658,6 +664,8 @@ namespace TestingStock
             Assert.AreNotEqual(Error, "");
         }
 
+        //================================================Size Validation============================================================
+
         [TestMethod]
         public void SizeInvalidData()
         {
@@ -761,6 +769,8 @@ namespace TestingStock
             //test to see that the result is correct
             Assert.AreNotEqual(Error, "");
         }
+        //================================================Supplier ID Validation============================================================
+
         [TestMethod]
         public void SupplierIDInvalidData()
         {
