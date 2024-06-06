@@ -144,9 +144,28 @@ public class clsStock2
         }
 
         // Supplier ID Validation
-        if (string.IsNullOrWhiteSpace(supplierID))
+        if (string.IsNullOrEmpty(supplierID))
         {
-            error += "Supplier ID is required. ";
+            error += "SupplierID cannot be blank. ";
+        }
+        else
+        {
+            int supplierIDValue;
+            if (!int.TryParse(supplierID, out supplierIDValue))
+            {
+                error += "SupplierID must be a number. ";
+            }
+            else
+            {
+                if (supplierIDValue < 1)
+                {
+                    error += "SupplierID cannot be less than 1. ";
+                }
+                if (supplierIDValue > 99)
+                {
+                    error += "SupplierID cannot be greater than 99. ";
+                }
+            }
         }
 
         return error;
