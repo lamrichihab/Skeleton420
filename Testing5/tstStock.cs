@@ -785,5 +785,70 @@ namespace TestingStock
             //test to see that the result is correct
             Assert.AreNotEqual(Error, "");
         }
+        [TestMethod]
+        public void SupplierIDMin()
+        {
+            clsStock2 StockItem = new clsStock2();
+            String Error = "";
+            SupplierID = "1";
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void SupplierIDMid()
+        {
+            clsStock2 StockItem = new clsStock2();
+            String Error = "";
+            SupplierID = "50";
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void SupplierIDMax()
+        {
+            clsStock2 StockItem = new clsStock2();
+            String Error = "";
+            SupplierID = "99";
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void SupplierIDMINLessOne()
+        {
+            clsStock2 StockItem = new clsStock2();
+            String Error = "";
+            SupplierID = "-1";
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
+        public void SupplierIDMaxlESSONE()
+        {
+            clsStock2 StockItem = new clsStock2();
+            String Error = "";
+            SupplierID = "98";
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            Assert.AreEqual(Error, "");
+        }
+        [TestMethod]
+        public void SupplierIDMaxPLUSONE()
+        {
+            clsStock2 StockItem = new clsStock2();
+            String Error = "";
+            SupplierID = "100";
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            Assert.AreNotEqual(Error, "");
+        }
+        [TestMethod]
+        public void SupplierIDNonNumeric()
+        {
+            clsStock2 StockItem = new clsStock2();
+            String Error = "";
+            SupplierID = "abc";
+            Error = StockItem.Valid(ProductName, ArrivedOn, QuantityInStock, Size, SupplierID);
+            Assert.AreNotEqual(Error, "");
+        }
     }
 }
