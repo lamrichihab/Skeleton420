@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using ClassLibrary;
+using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using ClassLibrary;
 
 public partial class _1_StaffViewer : Page
 {
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            // Display staff information on page load
+            staffInfoDiv.InnerHtml = GetStaffInfo();
+        }
+    }
+
     // This function retrieves staff data from the session
     public string GetStaffInfo()
     {
@@ -22,9 +27,9 @@ public partial class _1_StaffViewer : Page
         // Create a formatted string with staff information
         string staffInfo = "Employee ID: " + staff.EmployeeId + "<br>" +
                            "Full Name: " + staff.FullName + "<br>" +
-                           "Role: " + staff.Role + "<br>" +
                            "Contact Phone: " + staff.ContactPhone + "<br>" +
                            "Contact Email: " + staff.ContactEmail + "<br>" +
+                           "Role: " + staff.Role + "<br>" +
                            "Department: " + staff.Department + "<br>" +
                            "Is Active: " + (staff.IsActive ? "Yes" : "No") + "<br>";
 

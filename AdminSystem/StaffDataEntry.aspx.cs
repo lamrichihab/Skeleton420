@@ -29,20 +29,15 @@ public partial class _1_StaffDataEntry : Page
         // Create a new instance of clsStaff
         clsStaff AllStaff = new clsStaff();
 
-        // Convert and capture data, handling any necessary type conversions
-        int EmployeeId;
-        if (!int.TryParse(txtEmployeeID.Text, out EmployeeId))
-        {
-            ShowError("Invalid Employee ID format. Please enter a valid integer value.");
-            return;
-        }
-        AllStaff.EmployeeId = EmployeeId;
-
+         // capturing the data
         string fullName = txtFullName.Text;
         string contactPhone = txtContactPhone.Text;
         string contactEmail = txtContactEmail.Text;
         string role = txtRole.Text;
         string department = txtDepartment.Text;
+        bool IsActive = chkIsActive.Checked;
+
+        // craeting the error 
         string Error = "";
         // Validate the data
         Error = AllStaff.Valid(fullName, contactEmail, contactPhone, department, role);
@@ -55,7 +50,11 @@ public partial class _1_StaffDataEntry : Page
             AllStaff.ContactEmail = contactEmail;
             AllStaff.Role = role;
             AllStaff.Department = department;
-            AllStaff.IsActive = chkIsActive.Checked;
+            AllStaff.IsActive = IsActive;
+
+            // Store in session
+            Session["StaffData"] = AllStaff;
+
             // create a new instance of the staff collection
             clsStaffCollection StaffList = new clsStaffCollection();
             // if this is a new record, add the data
@@ -75,6 +74,9 @@ public partial class _1_StaffDataEntry : Page
                 // update the record
                 StaffList.Update();
             }
+            StaffList.ThisStaff = AllStaff;
+            StaffList.Add();
+            Response.Redirect("StaffViewer.aspx");
         }
         else
         {
@@ -112,11 +114,13 @@ public partial class _1_StaffDataEntry : Page
         // Create a variable to store the result of the find operation
         Boolean Found = false;
 
-        // Get the primary key entered by the user
-        EmployeeId = Convert.ToInt32(txtEmployeeID.Text);
-
-        // Find the record
-        Found = AStaff.Find(EmployeeId);
+        if (txtEmployeeID.Text != "")
+        {
+            //get the primary key entered by the user
+            EmployeeId = Convert.ToInt32(txtEmployeeID.Text);
+            //find the record
+            Found = AStaff.Find(EmployeeId);
+        }
 
         // If found, display the values of the properties in the form
         if (Found == true)
@@ -127,8 +131,18 @@ public partial class _1_StaffDataEntry : Page
             txtContactEmail.Text = AStaff.ContactEmail;
             txtDepartment.Text = AStaff.Department;
             chkIsActive.Checked = AStaff.IsActive;
+            lblError.Text = "";
         }
-
+        else
+        {
+            txtFullName.Text = "";
+            txtRole.Text = "";
+            txtContactPhone.Text = "";
+            txtContactEmail.Text = "";
+            txtDepartment.Text = "";
+            lblError.Text = "ID does not exist";
+            lblError.Visible = true;
+        }
     }
     void DisplayStaff()
     {
