@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -37,15 +38,24 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create instance
         clsStockCollection StockList = new clsStockCollection();
         //find the record to update
-        StockList.ThisStock.Find(ProductID);
-        //display the data for the record
-        txtProductID.Text = StockList.ThisStock.ProductID.ToString();
-        txtProductName.Text = StockList.ThisStock.ProductName.ToString();
-        txtQuantityInStock.Text = StockList.ThisStock.QuantityInStock.ToString();
-        txtSize.Text = StockList.ThisStock.Size.ToString();
-        txtArrivedOn.Text = StockList.ThisStock.ArrivedOn.ToString("yyyy-MM-dd");
-        chkAvailable.Checked = StockList.ThisStock.Available;
-        txtSupplierID.Text = StockList.ThisStock.SupplierID.ToString ();
+        bool found = StockList.ThisStock.Find(ProductID);
+        if (found)
+        {
+            //display the data for the record
+            txtProductID.Text = StockList.ThisStock.ProductID.ToString();
+            txtProductName.Text = StockList.ThisStock.ProductName.ToString();
+            txtQuantityInStock.Text = StockList.ThisStock.QuantityInStock.ToString();
+            txtSize.Text = StockList.ThisStock.Size.ToString();
+            txtArrivedOn.Text = StockList.ThisStock.ArrivedOn.ToString("yyyy-MM-dd");
+            chkAvailable.Checked = StockList.ThisStock.Available;
+            txtSupplierID.Text = StockList.ThisStock.SupplierID.ToString();
+        }
+        else
+        {
+            // Handle the case where the Product is not found
+            lblError.Text = "Product not found.";
+            lblError.Visible = true;
+        }
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -70,7 +80,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Error == "")
         {
             //capture all the data
-            StockItem.ProductName =Convert.ToString(ProductName) ;
+            StockItem.ProductName = Convert.ToString(ProductName);
             StockItem.ArrivedOn = Convert.ToDateTime(ArrivedOn);
             StockItem.QuantityInStock = Convert.ToInt32(QuantityInStock);
             StockItem.Size = Convert.ToString(Size);
