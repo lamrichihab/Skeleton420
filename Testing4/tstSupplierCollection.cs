@@ -194,10 +194,10 @@ namespace Testing4
         {
             clsSupplierCollection FilteredSuppliers = new clsSupplierCollection();
             Boolean ok = true;
-            FilteredSuppliers.ReportByContactName("Michael Brown");
+            FilteredSuppliers.ReportByContactName("Samantha Lee");
             if (FilteredSuppliers.Count == 2)
             {
-                if (FilteredSuppliers.SupplierList[0].SupplierID != 3)
+                if (FilteredSuppliers.SupplierList[0].SupplierID != 6)
                 {
                     ok = false;
                 }

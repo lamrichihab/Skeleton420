@@ -214,17 +214,17 @@ namespace Testing1
             // Variable to store the outcome
             Boolean OK = true;
             // Apply a role that doesn't exist
-            FilteredStaff.ReportByDepartment("Sales");
+            FilteredStaff.ReportByDepartment("Engineering");
             // Check that the correct number of records are found
             if (FilteredStaff.Count == 2)
             {
                 // Check to see that the first record is 4
-                if (FilteredStaff.StaffList[0].EmployeeId != 4)
+                if (FilteredStaff.StaffList[0].EmployeeId != 6)
                 {
                     OK = false;
                 }
                 // Check to see that the second record is 5
-                if (FilteredStaff.StaffList[1].EmployeeId != 5)
+                if (FilteredStaff.StaffList[1].EmployeeId != 7)
                 {
                     OK = false;
                 }
